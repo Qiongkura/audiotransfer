@@ -1,0 +1,139 @@
+{
+  "gap_ms": 12,
+  "gap_policy": "within_note",
+  "duration_ms": 308773,
+  "sound_mode": "pulse",
+  "active_low": true,
+  "inactive_level": "HIGH",
+  "attack_ms": 12,
+  "release_ms": 24,
+  "hardware_carrier_hz": "note_frequency",
+  "harmonic_colour": null,
+  "legato_policy": "continuous_voice",
+  "legato_transitions": 37,
+  "arrangement": {
+    "title": "\u8336\u6c64\uff08\u539f\u66f2\u5b8c\u6574\u65cb\u5f8b\u6821\u8c31\uff09",
+    "duration_ms": 308773,
+    "transpose_semitones": 12,
+    "tempo_bpm": 112,
+    "method": "reviewed_song_score_aligned_to_recording",
+    "score_reference": "https://www.jianpujia.com/jianpu/154500.html",
+    "sections": [
+      {
+        "name": "\u524d\u594f\u7b1b\u58f0",
+        "start_ms": 6510,
+        "end_ms": 23438,
+        "quarter_ms": 529.0,
+        "notes": 12,
+        "reliable_coverage": 0.811,
+        "pitch_agreement_65_cents": 0.932,
+        "fit_error": 1.041
+      },
+      {
+        "name": "\u4e3b\u6b4c\u4e00",
+        "start_ms": 25700,
+        "end_ms": 62080,
+        "quarter_ms": 535.0,
+        "notes": 75,
+        "reliable_coverage": 0.833,
+        "pitch_agreement_65_cents": 0.684,
+        "fit_error": 1.456
+      },
+      {
+        "name": "\u526f\u6b4c\u4e00",
+        "start_ms": 62120,
+        "end_ms": 96440,
+        "quarter_ms": 535.5,
+        "notes": 88,
+        "reliable_coverage": 0.841,
+        "pitch_agreement_65_cents": 0.865,
+        "fit_error": 0.529,
+        "final_vocal_hold_ms": 48
+      },
+      {
+        "name": "\u4e3b\u6b4c\u4e8c",
+        "start_ms": 98540,
+        "end_ms": 134954,
+        "quarter_ms": 535.5,
+        "notes": 75,
+        "reliable_coverage": 0.821,
+        "pitch_agreement_65_cents": 0.691,
+        "fit_error": 1.129
+      },
+      {
+        "name": "\u526f\u6b4c\u4e8c",
+        "start_ms": 134990,
+        "end_ms": 169840,
+        "quarter_ms": 534.5,
+        "notes": 88,
+        "reliable_coverage": 0.834,
+        "pitch_agreement_65_cents": 0.909,
+        "fit_error": 0.489,
+        "final_vocal_hold_ms": 642
+      },
+      {
+        "name": "\u95f4\u594f\u516b\u5c0f\u8282",
+        "start_ms": 175640,
+        "end_ms": 192776,
+        "quarter_ms": 535.5,
+        "notes": 41,
+        "alignment_method": "reviewed_recording_alignment",
+        "reviewed_alignment_evidence": {
+          "method": "reference_score_and_recording_spectrum",
+          "native_notes": [
+            "C#4",
+            "B3",
+            "A3"
+          ],
+          "spectral_support_among_three_score_pitches": 0.794,
+          "reference_octave_adjustment": -12,
+          "support_is_not_listening_accuracy": true
+        }
+      },
+      {
+        "name": "\u4e3b\u6b4c\u4e09",
+        "start_ms": 192820,
+        "end_ms": 212134,
+        "quarter_ms": 536.5,
+        "notes": 38,
+        "reliable_coverage": 0.836,
+        "pitch_agreement_65_cents": 0.752,
+        "fit_error": 1.186
+      },
+      {
+        "name": "\u526f\u6b4c\u4e09",
+        "start_ms": 212134,
+        "end_ms": 246394,
+        "quarter_ms": 536.0,
+        "notes": 88,
+        "reliable_coverage": 0.824,
+        "pitch_agreement_65_cents": 0.912,
+        "fit_error": 0.39,
+        "pickup_rest_trimmed_ms": 44
+      },
+      {
+        "name": "\u526f\u6b4c\u56db",
+        "start_ms": 246394,
+        "end_ms": 282000,
+        "quarter_ms": 535.5,
+        "notes": 88,
+        "reliable_coverage": 0.854,
+        "pitch_agreement_65_cents": 0.896,
+        "fit_error": 0.477,
+        "pickup_rest_trimmed_ms": 14,
+        "final_vocal_hold_ms": 1348
+      },
+      {
+        "name": "\u5c3e\u594f\u7b1b\u58f0",
+        "start_ms": 282790,
+        "end_ms": 299942,
+        "quarter_ms": 536.0,
+        "notes": 12,
+        "reliable_coverage": 0.821,
+        "pitch_agreement_65_cents": 0.963,
+        "fit_error": 0.321
+      }
+    ],
+    "legato_transitions": 37
+  }
+}

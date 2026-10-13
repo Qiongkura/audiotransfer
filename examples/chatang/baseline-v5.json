@@ -1,0 +1,7100 @@
+[
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 1060,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 5400,
+    "note": "D5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 358,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 222,
+    "note": "A4",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 80,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 360,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 180,
+    "note": "B4",
+    "legato": true,
+    "velocity": 107
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 85,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 133,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 222,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 175,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 445,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 225,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 540,
+    "note": "F#6",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 135,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 200,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 106
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 220,
+    "note": "F#6",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 132,
+    "note": "E4",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 398,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 4070,
+    "note": "E6",
+    "legato": true,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 1244.507935,
+    "duration_ms": 80,
+    "note": "D#6",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 130,
+    "note": "D5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 820,
+    "note": "E5",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 525,
+    "note": "B4",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 133,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 132,
+    "note": "B4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 132,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 133,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 133,
+    "note": "F#6",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1760.0,
+    "duration_ms": 62,
+    "note": "A6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 1640,
+    "note": "F#6",
+    "legato": true,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 500,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 80,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 4120,
+    "note": "B5",
+    "legato": true,
+    "velocity": 104
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 80,
+    "note": "A#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 805,
+    "note": "D5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 135,
+    "note": "C6",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 135,
+    "note": "B5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 263,
+    "note": "G#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 254,
+    "note": "B5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 128,
+    "note": "G#5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 500,
+    "note": "E4",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 420,
+    "note": "E5",
+    "legato": false,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 160,
+    "note": "G4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 320,
+    "note": "A4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 120,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 215,
+    "note": "A4",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 185,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 260,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 100,
+    "note": "E4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 130,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 132,
+    "note": "G4",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 318,
+    "note": "A4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 485,
+    "note": "B4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 405,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 135,
+    "note": "D5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1015,
+    "note": "E5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 80,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 200,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 65,
+    "note": "A4",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 133,
+    "note": "A#4",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 602,
+    "note": "B4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 192,
+    "note": "F4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 266,
+    "note": "G4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 322,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 160,
+    "note": "C5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 585,
+    "note": "B4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 135,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1760.0,
+    "duration_ms": 135,
+    "note": "A6",
+    "legato": false,
+    "velocity": 109
+  },
+  {
+    "frequency_hz": 1975.533205,
+    "duration_ms": 135,
+    "note": "B6",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 70,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 65,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 135,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 100,
+    "note": "E5",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 320,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 180,
+    "note": "E5",
+    "legato": true,
+    "velocity": 104
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 90,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 270,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 340,
+    "note": "E5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 465,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 215,
+    "note": "F5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 290,
+    "note": "F5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 240,
+    "note": "E5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 250,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 300,
+    "note": "E5",
+    "legato": false,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 315,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 133,
+    "note": "G5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 267,
+    "note": "A5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 135,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 210,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 320,
+    "note": "E5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 180,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 80,
+    "note": "C5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 270,
+    "note": "B4",
+    "legato": true,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 110,
+    "note": "B4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 80,
+    "note": "C5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 215,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 185,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 280,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 345,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 355,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 178,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 202,
+    "note": "F4",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 195,
+    "note": "E4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 133,
+    "note": "A#4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 267,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 135,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 70,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 870,
+    "note": "B4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 130,
+    "note": "C5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 100,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 160,
+    "note": "B4",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 138,
+    "note": "A4",
+    "legato": true,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 542,
+    "note": "E5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 160,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 180,
+    "note": "A4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 275,
+    "note": "G4",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 225,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 80,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 235,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 85,
+    "note": "F4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 230,
+    "note": "E4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 138,
+    "note": "E4",
+    "legato": false,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 412,
+    "note": "A4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 220,
+    "note": "B4",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 100,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 345,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 135,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 200,
+    "note": "D5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 700,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 480,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 100,
+    "note": "A#4",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 390,
+    "note": "B4",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 265,
+    "note": "B4",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 133,
+    "note": "B4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 132,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 135,
+    "note": "F4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 105,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 165,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 135,
+    "note": "C5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 270,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 135,
+    "note": "C5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 455,
+    "note": "B4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 140,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 440,
+    "note": "A5",
+    "legato": false,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 182,
+    "note": "E5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 133,
+    "note": "B5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 105,
+    "note": "E5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 240,
+    "note": "E5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 160,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 75,
+    "note": "D5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 145,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 375,
+    "note": "E5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 445,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 78,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 162,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 102,
+    "note": "F5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 98,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 168,
+    "note": "E5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 132,
+    "note": "F5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 200,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 140,
+    "note": "E5",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 120,
+    "note": "F5",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 80,
+    "note": "F5",
+    "legato": false,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 135,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 270,
+    "note": "G5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 135,
+    "note": "G#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 138,
+    "note": "A5",
+    "legato": true,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 137,
+    "note": "A5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 205,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 70,
+    "note": "F5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 210,
+    "note": "E5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 180,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 180,
+    "note": "C5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 220,
+    "note": "B4",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 135,
+    "note": "C5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 65,
+    "note": "C5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 202,
+    "note": "B4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 133,
+    "note": "B4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 185,
+    "note": "B4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 300,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 170,
+    "note": "F4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 230,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 100,
+    "note": "E4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 90,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 110,
+    "note": "F4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 100,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 85,
+    "note": "B4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 137,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 138,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 200,
+    "note": "B5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 60,
+    "note": "B5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 100,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 172,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 448,
+    "note": "B4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 220,
+    "note": "A4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 100,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 80,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 225,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 2115,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 65,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 123,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 212,
+    "note": "D5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 78,
+    "note": "D5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 167,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 335,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 265,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 265,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 210,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 188,
+    "note": "A5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 132,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 685,
+    "note": "B5",
+    "legato": true,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 135,
+    "note": "B5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 340,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 760,
+    "note": "B5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 580,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 192,
+    "note": "B5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 348,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 182,
+    "note": "B5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 78,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 188,
+    "note": "A5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 267,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 135,
+    "note": "F5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 210,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 400,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 335,
+    "note": "G5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 125,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 200,
+    "note": "C5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 80,
+    "note": "C5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1080,
+    "note": "E5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 280,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 180,
+    "note": "E5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 520,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 240,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 350,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 245,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 123,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 122,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 80,
+    "note": "C6",
+    "legato": true,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 642,
+    "note": "B5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 398,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 265,
+    "note": "G#5",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 795,
+    "note": "B5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 530,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 570,
+    "note": "B5",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 135,
+    "note": "B5",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 65,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 260,
+    "note": "A5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 212,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 266,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 182,
+    "note": "E6",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 2300,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 260,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 200,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 130,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 130,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 130,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 138,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 332,
+    "note": "F5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 470,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 130,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 405,
+    "note": "B5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 355,
+    "note": "B5",
+    "legato": false,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 80,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 320,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 80,
+    "note": "C6",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 632,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 138,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 70,
+    "note": "E6",
+    "legato": false,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 195,
+    "note": "B5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 105,
+    "note": "E6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 580,
+    "note": "B5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 220,
+    "note": "B5",
+    "legato": false,
+    "velocity": 108
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 192,
+    "note": "A5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 138,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 132,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 198,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 120,
+    "note": "F5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 485,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 395,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 260,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 680,
+    "note": "E5",
+    "legato": false,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 260,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 200,
+    "note": "E5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 440,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 570,
+    "note": "E5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 210,
+    "note": "G5",
+    "legato": true,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 380,
+    "note": "E5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 220,
+    "note": "F5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 60,
+    "note": "F5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 140,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 865,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 390,
+    "note": "A5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 105,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 720,
+    "note": "B5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 420,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 85,
+    "note": "B5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 135,
+    "note": "B5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 540,
+    "note": "B5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 138,
+    "note": "B5",
+    "legato": false,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 137,
+    "note": "A#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 185,
+    "note": "A5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 440,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 730,
+    "note": "A5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 210,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 80,
+    "note": "F5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 780,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 255,
+    "note": "F5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 305,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 160,
+    "note": "F5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 80,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 440,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 400,
+    "note": "A5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 140,
+    "note": "C6",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 208,
+    "note": "B5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 312,
+    "note": "A5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 100,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 200,
+    "note": "E5",
+    "legato": false,
+    "velocity": 79
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 70,
+    "note": "E5",
+    "legato": false,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 275,
+    "note": "A4",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 137,
+    "note": "E5",
+    "legato": true,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 98,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 80,
+    "note": "G4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 220,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 520,
+    "note": "A4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 180,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 160,
+    "note": "A4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 185,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 215,
+    "note": "E4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 192,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 143,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 85,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 190,
+    "note": "B4",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 210,
+    "note": "B4",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 450,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 270,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 398,
+    "note": "E5",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 162,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 105,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 375,
+    "note": "B4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 185,
+    "note": "A#4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 545,
+    "note": "B4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 135,
+    "note": "C5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 135,
+    "note": "A4",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 80,
+    "note": "F4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 430,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 275,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 137,
+    "note": "C5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 318,
+    "note": "B4",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 85,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 133,
+    "note": "B4",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 132,
+    "note": "C5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 190,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 215,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 85,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 180,
+    "note": "E5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 80,
+    "note": "E4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 120,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 350,
+    "note": "E5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 280,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 398,
+    "note": "E5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 132,
+    "note": "F5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 138,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 540,
+    "note": "F5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 127,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 75,
+    "note": "D5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 180,
+    "note": "F5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 270,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 135,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 135,
+    "note": "F5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 275,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 137,
+    "note": "G5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 393,
+    "note": "A5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 195,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 285,
+    "note": "E5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 347,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 68,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 78
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 300,
+    "note": "B4",
+    "legato": true,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 120,
+    "note": "C5",
+    "legato": true,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 215,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 145,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 80,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 110,
+    "note": "F4",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 138,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 137,
+    "note": "F4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 95,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 180,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 375,
+    "note": "B4",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 125,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 260,
+    "note": "F4",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 100,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 75,
+    "note": "A4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 145,
+    "note": "C5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 200,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 1115,
+    "note": "B4",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 137,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 138,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 140,
+    "note": "D5",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 140,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 140,
+    "note": "E5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 170,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 220,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 740,
+    "note": "A4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 188,
+    "note": "F4",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 311.126984,
+    "duration_ms": 232,
+    "note": "D#4",
+    "legato": false,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 80,
+    "note": "E4",
+    "legato": true,
+    "velocity": 79
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 212,
+    "note": "G4",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 143,
+    "note": "A4",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 143,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 274,
+    "note": "B4",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 133,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 75,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 260,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 200,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 135,
+    "note": "D5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 135,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 530,
+    "note": "E5",
+    "legato": true,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 135,
+    "note": "E5",
+    "legato": false,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 185,
+    "note": "F5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 160,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 120,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 72,
+    "note": "B4",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 748,
+    "note": "B4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 100,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 222,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 133,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 65,
+    "note": "C5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 68,
+    "note": "B4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 407,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 85,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 975,
+    "note": "B4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 185,
+    "note": "B4",
+    "legato": false,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 120,
+    "note": "C5",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 480,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 175,
+    "note": "E5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 270,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 395,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 220,
+    "note": "F5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 80,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 450,
+    "note": "F5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 140,
+    "note": "F5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 140,
+    "note": "E5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 280,
+    "note": "E5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 190,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 90,
+    "note": "F5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 230,
+    "note": "E5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 180,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 260,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 365,
+    "note": "A5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 335,
+    "note": "F5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 140,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 60,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 437,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 138,
+    "note": "B4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 105,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 120,
+    "note": "B4",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 100,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 215,
+    "note": "B4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 133,
+    "note": "C5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 387,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 943,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 102,
+    "note": "G4",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 170,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 132,
+    "note": "A5",
+    "legato": true,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 133,
+    "note": "B5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 65,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 140,
+    "note": "A4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 192,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 266,
+    "note": "B4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 82,
+    "note": "A4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 315,
+    "note": "A4",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 265,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 142,
+    "note": "B4",
+    "legato": true,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 2203,
+    "note": "E5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 295,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 295,
+    "note": "E5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 295,
+    "note": "E5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 138,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 137,
+    "note": "F5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 195,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 212,
+    "note": "F5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 266,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 132,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 672,
+    "note": "B5",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 98,
+    "note": "B5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 260,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1080,
+    "note": "B5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 520,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 200,
+    "note": "B5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 522,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 133,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 265,
+    "note": "A5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 130,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 130,
+    "note": "F5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 130,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 130,
+    "note": "F5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 200,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 212,
+    "note": "F5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 168,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 180,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 188,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 172,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 892,
+    "note": "E5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 128,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 360,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 260,
+    "note": "E5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 340,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 480,
+    "note": "E5",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 305,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 127,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 128,
+    "note": "C6",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 840,
+    "note": "B5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 130,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 70,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 990,
+    "note": "B5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 170,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 220,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 130,
+    "note": "B4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 130,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 580,
+    "note": "B5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 265,
+    "note": "B5",
+    "legato": false,
+    "velocity": 104
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 195,
+    "note": "A5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 468,
+    "note": "B5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 132,
+    "note": "E6",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1244.507935,
+    "duration_ms": 135,
+    "note": "D#6",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 135,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 2050,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 300,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 320,
+    "note": "E5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 80,
+    "note": "E5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 140,
+    "note": "F5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 315,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 185,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 218,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 274,
+    "note": "F5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 138,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 800,
+    "note": "B5",
+    "legato": true,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 130,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 130,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 900,
+    "note": "B5",
+    "legato": false,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 275,
+    "note": "B5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 290,
+    "note": "A#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 105,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 120,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 420,
+    "note": "B5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 320,
+    "note": "B5",
+    "legato": false,
+    "velocity": 108
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 220,
+    "note": "A5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 240,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 160,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 120,
+    "note": "F5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 400,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 240,
+    "note": "F5",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 440,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1200,
+    "note": "E5",
+    "legato": false,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 220,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 200,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 560,
+    "note": "E5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 135,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 65,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 340,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 360,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 140,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 800,
+    "note": "B5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 310,
+    "note": "A5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1050,
+    "note": "B5",
+    "legato": false,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 340,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 190,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 560,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 230,
+    "note": "B5",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 80,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 180,
+    "note": "A5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 178,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 254,
+    "note": "F5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 413,
+    "note": "A5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 143,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 2502,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 130,
+    "note": "F5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 130,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 90,
+    "note": "E6",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 100,
+    "note": "A5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 140,
+    "note": "E6",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 68,
+    "note": "A5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1392,
+    "note": "E5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 100,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 200,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 222,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 78,
+    "note": "B5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 120,
+    "note": "E5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 160,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 70,
+    "note": "A5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 90,
+    "note": "A#5",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 540,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 315,
+    "note": "A5",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 143,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 422,
+    "note": "E5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 750,
+    "note": "G5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 490,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 205,
+    "note": "A4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 215,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 280,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 320,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 260,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 60,
+    "note": "A4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 200,
+    "note": "B4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 275,
+    "note": "G4",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 485,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 520,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 85,
+    "note": "B5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 175,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 215,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 265,
+    "note": "E5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 938,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 407,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 795,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 270,
+    "note": "E5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 70,
+    "note": "F#6",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 140,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 335,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1335,
+    "note": "E5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 275,
+    "note": "E6",
+    "legato": false,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 137,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 528,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 405,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 535,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 260,
+    "note": "B5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 265,
+    "note": "B5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 65,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 200,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 265,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 133,
+    "note": "B4",
+    "legato": true,
+    "velocity": 78
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 132,
+    "note": "E6",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 135,
+    "note": "B5",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 135,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 220,
+    "note": "A5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 80,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 240,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 200,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 70,
+    "note": "D5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 270,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 135,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 185,
+    "note": "E6",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 480,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 135,
+    "note": "B5",
+    "legato": false,
+    "velocity": 107
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 780,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 125,
+    "note": "B4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 142,
+    "note": "E6",
+    "legato": false,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 143,
+    "note": "B5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 545,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 260,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 280,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 280,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 550,
+    "note": "E4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 340,
+    "note": "A4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 185,
+    "note": "G4",
+    "legato": false,
+    "velocity": 79
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 115,
+    "note": "A4",
+    "legato": true,
+    "velocity": 78
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 60,
+    "note": "A#4",
+    "legato": false,
+    "velocity": 77
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 120,
+    "note": "A4",
+    "legato": false,
+    "velocity": 77
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 180,
+    "note": "G4",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 320,
+    "note": "A4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 120,
+    "note": "A4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 100,
+    "note": "G4",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 150,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 210,
+    "note": "E4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 210,
+    "note": "F4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 495,
+    "note": "A4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 135,
+    "note": "B4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 135,
+    "note": "B4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 135,
+    "note": "D5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 132,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 266,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 132,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 580,
+    "note": "E5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 60,
+    "note": "E5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 480,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 160,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 300,
+    "note": "B4",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 340,
+    "note": "B4",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 130,
+    "note": "A#4",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 70,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 349.228231,
+    "duration_ms": 140,
+    "note": "F4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 160,
+    "note": "F#4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 172,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 123,
+    "note": "B4",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 123,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 122,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 185,
+    "note": "C5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 95,
+    "note": "B4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 100,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 220,
+    "note": "B4",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 293.664768,
+    "duration_ms": 490,
+    "note": "D4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 293.664768,
+    "duration_ms": 110,
+    "note": "D4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 160,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 325,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 215,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 325,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 455,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 85,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 495,
+    "note": "F5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 300,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 135,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 107
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 135,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 270,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 200,
+    "note": "E5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 65,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 215,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 100,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 210,
+    "note": "G5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 190,
+    "note": "A5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 225,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 75,
+    "note": "F5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 120,
+    "note": "E5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 80,
+    "note": "E5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 180,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 70,
+    "note": "C5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 250,
+    "note": "C5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 125,
+    "note": "B4",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 335,
+    "note": "B4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 60,
+    "note": "B4",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 160,
+    "note": "C5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 160,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 120,
+    "note": "C5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 80,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 369.994423,
+    "duration_ms": 805,
+    "note": "F#4",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 167,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 108,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 120,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 440.0,
+    "duration_ms": 160,
+    "note": "A4",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 110,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 90,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 75,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 125,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 391.995436,
+    "duration_ms": 182,
+    "note": "G4",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 143,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 215,
+    "note": "B4",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 466.163762,
+    "duration_ms": 540,
+    "note": "A#4",
+    "legato": true,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 80,
+    "note": "C5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 95,
+    "note": "D5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 2185,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 340,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 138,
+    "note": "D#5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 137,
+    "note": "E5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 137,
+    "note": "E5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 168,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 200,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 280,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 380,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 190,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 350,
+    "note": "B5",
+    "legato": true,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 322,
+    "note": "B5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 133,
+    "note": "A5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 133,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 92,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 985,
+    "note": "B5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 540,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 135,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 398,
+    "note": "B5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 132,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 132,
+    "note": "B5",
+    "legato": true,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 133,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 205,
+    "note": "A5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 192,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 133,
+    "note": "F5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 265,
+    "note": "E5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 398,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 92,
+    "note": "F5",
+    "legato": false,
+    "velocity": 78
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 540,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1160,
+    "note": "E5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 88,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 412,
+    "note": "E5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 480,
+    "note": "E5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 185,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 335,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 190,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 120,
+    "note": "F5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 170,
+    "note": "F5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 140,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 775,
+    "note": "B5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 185,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 80,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1020,
+    "note": "B5",
+    "legato": false,
+    "velocity": 106
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 175,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 185,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 120,
+    "note": "B5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 880,
+    "note": "B5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 320,
+    "note": "A5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 398,
+    "note": "B5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 132,
+    "note": "E6",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1174.659072,
+    "duration_ms": 135,
+    "note": "D6",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 1795,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 98,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 142,
+    "note": "A5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 180,
+    "note": "E6",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 160,
+    "note": "E5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 320,
+    "note": "E5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 270,
+    "note": "E5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 210,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 320,
+    "note": "E5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 405,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 135,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 672,
+    "note": "B5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 133,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 265,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 870,
+    "note": "B5",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 340,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 80,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 140,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 520,
+    "note": "B5",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 280,
+    "note": "B5",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 185,
+    "note": "A5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 135,
+    "note": "G#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 132,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 133,
+    "note": "F5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 195,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 70,
+    "note": "G5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 382,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 68,
+    "note": "G5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 260,
+    "note": "G5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 320,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 1100,
+    "note": "E5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 128,
+    "note": "C5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 127,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 127,
+    "note": "C5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 128,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 580,
+    "note": "E5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 230,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 260,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 315,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 133,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 132,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 270,
+    "note": "B5",
+    "legato": false,
+    "velocity": 97
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 402,
+    "note": "B5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 133,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 215,
+    "note": "A5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1020,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 420,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 960,
+    "note": "B5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 100,
+    "note": "B5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 160,
+    "note": "G#5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 320,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 130,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 505,
+    "note": "A5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 125,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 1500,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 170,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 370,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 260,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 240,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 80,
+    "note": "F5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 270,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 210,
+    "note": "E5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 140,
+    "note": "E5",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 325,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 135,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 678,
+    "note": "B5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 62,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 192,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 128,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 900,
+    "note": "B5",
+    "legato": false,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 585,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 75,
+    "note": "C6",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 240,
+    "note": "B5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 218,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 132,
+    "note": "C6",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 190,
+    "note": "B5",
+    "legato": false,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 80,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 200,
+    "note": "A5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 140,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 190,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 260,
+    "note": "E5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 420,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 140,
+    "note": "G5",
+    "legato": true,
+    "velocity": 80
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 520,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 945,
+    "note": "E5",
+    "legato": false,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 85,
+    "note": "B4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 523.251131,
+    "duration_ms": 182,
+    "note": "C5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 133,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 133,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 672,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 220,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 104
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 320,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 200,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 182,
+    "note": "A5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 128,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 750,
+    "note": "B5",
+    "legato": true,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 260,
+    "note": "A5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 960,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 75,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 465,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 120,
+    "note": "A#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 260,
+    "note": "B5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 260,
+    "note": "B5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 217,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 83,
+    "note": "B5",
+    "legato": false,
+    "velocity": 101
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 280,
+    "note": "A5",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 320,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 80,
+    "note": "B5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 190,
+    "note": "E6",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 2290,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 515,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 137,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 88,
+    "note": "F5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 310,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 70,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 190,
+    "note": "E5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 405,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 135,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 675,
+    "note": "B5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 75,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 280,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1020,
+    "note": "B5",
+    "legato": false,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 460,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 160,
+    "note": "B5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 280,
+    "note": "B5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 220,
+    "note": "B5",
+    "legato": false,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 280,
+    "note": "B5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 320,
+    "note": "A5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 200,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 140,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 180,
+    "note": "E5",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 405,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 783.990872,
+    "duration_ms": 135,
+    "note": "G5",
+    "legato": true,
+    "velocity": 82
+  },
+  {
+    "frequency_hz": 698.456463,
+    "duration_ms": 160,
+    "note": "F5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 370,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 890,
+    "note": "E5",
+    "legato": false,
+    "velocity": 105
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 190,
+    "note": "E5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 128,
+    "note": "E5",
+    "legato": false,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 127,
+    "note": "E5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 255,
+    "note": "D5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 560,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 135,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 104
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 405,
+    "note": "E5",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 260,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 80,
+    "note": "G#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 180,
+    "note": "C#6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 760,
+    "note": "B5",
+    "legato": false,
+    "velocity": 100
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 260,
+    "note": "A5",
+    "legato": false,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1080,
+    "note": "B5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 550,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 530,
+    "note": "B5",
+    "legato": false,
+    "velocity": 99
+  },
+  {
+    "frequency_hz": 1046.502261,
+    "duration_ms": 80,
+    "note": "C6",
+    "legato": false,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 230,
+    "note": "B5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 135,
+    "note": "A5",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 475,
+    "note": "F#5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 880.0,
+    "duration_ms": 592,
+    "note": "A5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 830.609395,
+    "duration_ms": 88,
+    "note": "G#5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 739.988845,
+    "duration_ms": 2960,
+    "note": "F#5",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 120,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 200,
+    "note": "E5",
+    "legato": false,
+    "velocity": 83
+  },
+  {
+    "frequency_hz": 329.627557,
+    "duration_ms": 405,
+    "note": "E4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 400,
+    "note": "E5",
+    "legato": false,
+    "velocity": 81
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 133,
+    "note": "E5",
+    "legato": false,
+    "velocity": 79
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 132,
+    "note": "B4",
+    "legato": true,
+    "velocity": 77
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 130,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 460,
+    "note": "C#5",
+    "legato": false,
+    "velocity": 84
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 195,
+    "note": "B4",
+    "legato": true,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 133,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 132,
+    "note": "E5",
+    "legato": true,
+    "velocity": 87
+  },
+  {
+    "frequency_hz": 622.253967,
+    "duration_ms": 60,
+    "note": "D#5",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 205,
+    "note": "E5",
+    "legato": true,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 133,
+    "note": "F#6",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 1760.0,
+    "duration_ms": 82,
+    "note": "A6",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 1670,
+    "note": "F#6",
+    "legato": true,
+    "velocity": 96
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 520,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 102
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 2210,
+    "note": "E6",
+    "legato": true,
+    "velocity": 104
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 60,
+    "note": "B4",
+    "legato": false,
+    "velocity": 85
+  },
+  {
+    "frequency_hz": 1318.510228,
+    "duration_ms": 1892,
+    "note": "E6",
+    "legato": false,
+    "velocity": 88
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 138,
+    "note": "D5",
+    "legato": false,
+    "velocity": 90
+  },
+  {
+    "frequency_hz": 659.255114,
+    "duration_ms": 550,
+    "note": "E5",
+    "legato": true,
+    "velocity": 98
+  },
+  {
+    "frequency_hz": 554.365262,
+    "duration_ms": 920,
+    "note": "C#5",
+    "legato": true,
+    "velocity": 91
+  },
+  {
+    "frequency_hz": 493.883301,
+    "duration_ms": 240,
+    "note": "B4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 80,
+    "note": "G#4",
+    "legato": true,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 415.304698,
+    "duration_ms": 75,
+    "note": "G#4",
+    "legato": false,
+    "velocity": 86
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 85,
+    "note": "F#6",
+    "legato": false,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 1760.0,
+    "duration_ms": 100,
+    "note": "A6",
+    "legato": true,
+    "velocity": 92
+  },
+  {
+    "frequency_hz": 1479.977691,
+    "duration_ms": 1690,
+    "note": "F#6",
+    "legato": true,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 470,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 103
+  },
+  {
+    "frequency_hz": 1108.730524,
+    "duration_ms": 120,
+    "note": "C#6",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 2680,
+    "note": "B5",
+    "legato": true,
+    "velocity": 94
+  },
+  {
+    "frequency_hz": 987.766603,
+    "duration_ms": 1400,
+    "note": "B5",
+    "legato": false,
+    "velocity": 95
+  },
+  {
+    "frequency_hz": 932.327523,
+    "duration_ms": 130,
+    "note": "A#5",
+    "legato": true,
+    "velocity": 89
+  },
+  {
+    "frequency_hz": 587.329536,
+    "duration_ms": 2252,
+    "note": "D5",
+    "legato": false,
+    "velocity": 93
+  },
+  {
+    "frequency_hz": 0.0,
+    "duration_ms": 6571,
+    "note": "rest",
+    "legato": false,
+    "velocity": 84
+  }
+]

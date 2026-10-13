@@ -1,0 +1,14 @@
+{
+  "song": "茶汤",
+  "artist": "郁可唯",
+  "duration_ms": 308773,
+  "events": 614,
+  "default_volume_percent": 50,
+  "flash_bytes": 40372,
+  "ram_bytes": 2260,
+  "platform_version": "20.0.0",
+  "arduino_stm32_version": "3.0.0",
+  "firmware_sha256": "b938e3b7ed0bc6f3f770a47f04392fb525a1af989cf9ca8fa4e8559e0fbdc61c",
+  "upload_verified": true,
+  "unit_tests_passed": 69
+}

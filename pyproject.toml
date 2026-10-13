@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "audiotransfer"
+version = "0.2.2"
+description = "Extract a monophonic melody and generate Arduino or STM32 PlatformIO firmware"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23", "imageio-ffmpeg>=0.6,<0.7"]
+
+[project.optional-dependencies]
+song = ["librosa>=0.11,<0.12", "demucs>=4.1,<4.2", "torchcrepe==0.0.24"]
+display = ["Pillow>=10"]
+
+[project.scripts]
+audiotransfer = "audiotransfer.cli:main"
+audiotransfer-gui = "audiotransfer.gui:main"
+audiotransfer-preview = "audiotransfer.preview:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["audiotransfer*"]
+
+[tool.setuptools.package-data]
+audiotransfer = ["*.h"]

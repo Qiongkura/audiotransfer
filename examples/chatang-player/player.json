@@ -1,0 +1,28 @@
+{
+  "title": "茶汤",
+  "artist": "郁可唯",
+  "width": 128,
+  "height": 64,
+  "controller": "ssd1306",
+  "addresses": [
+    "0x3C",
+    "0x3D"
+  ],
+  "scl": "PB6",
+  "sda": "PB7",
+  "volume_up": "PA0",
+  "volume_down": "PA1",
+  "key_active_level": "LOW",
+  "volume_initial_percent": 50,
+  "volume_step_policy": "1_below_20__5_above",
+  "volume_gain_curve": "logarithmic_60db_control_gain_not_spl",
+  "debounce_ms": 25,
+  "hold_delay_ms": 350,
+  "hold_repeat_ms": 150,
+  "volume_ramp_ms": 20,
+  "refresh_ms": 250,
+  "i2c_chunk_bytes": 16,
+  "i2c_timeout_ms": 5,
+  "display_failure_policy": "keep_playing_retry_every_3s",
+  "duration_ms": 308773
+}

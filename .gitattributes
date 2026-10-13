@@ -1,0 +1,12 @@
+* text=auto
+*.py text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.bat text eol=crlf
+*.bin binary
+*.mid binary
+*.npz binary
