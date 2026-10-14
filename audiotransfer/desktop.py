@@ -16,6 +16,8 @@ import tempfile
 from typing import Callable
 import uuid
 
+from . import __version__
+
 ROOT = Path(__file__).resolve().parent.parent
 AUDIO_SUFFIXES = {".mp3", ".wav", ".flac", ".m4a", ".aac", ".ogg", ".opus", ".wma"}
 CHATANG_SHA256 = "2b34f483a9b57082300ce296988bfc6cbdfca94711a691bf0d7b34b0cad11e4b"
@@ -240,7 +242,7 @@ def convert(
         event_count=len(notes),
         requested_content_mode=request.content_mode,
         detected_content_mode=resolved,
-        converter_version="0.3.1",
+        converter_version=__version__,
         files=project_hashes(project),
     )
     (project / "desktop-job.json").write_text(

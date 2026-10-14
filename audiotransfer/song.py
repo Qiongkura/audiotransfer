@@ -214,7 +214,7 @@ def continuous_instrument_lead(
     )
     neural = (
         neural_frames(samples, lead_config, progress, device, "乐器")
-        if config.song_backend == "crepe"
+        if config.song_backend in {"crepe", "rmvpe"}
         else [PitchFrame(0, 0, 0) for _ in selected]
     )
     merged = []
@@ -806,6 +806,46 @@ def vocal_frames(
     progress: Progress | None = None,
     device: str = "auto",
 ) -> list[PitchFrame]:
+    if config.song_backend == "rmvpe":
+        from .vocal_pitch import estimate_vocals, cross_check_vocals
+
+        previous = neural_frames(samples, config, progress, device)
+        if (
+            max((frame.rms for frame in previous), default=0)
+            < config.energy_threshold / 2
+        ):
+            return previous
+        try:
+            pitch, confidence = estimate_vocals(
+                samples, config.sample_rate, config.hop_size, device, progress
+            )
+        except Exception as exc:
+            raise SongAnalysisError(f"人声基音核验失败：{exc}") from exc
+        bounded = (pitch >= config.min_frequency_hz) & (
+            pitch <= config.max_frequency_hz
+        )
+        checked = cross_check_vocals(
+            previous, np.where(bounded, pitch, 0), np.where(bounded, confidence, 0)
+        )
+        # A weak but observed continuation of the same vowel can survive a
+        # missed second-model frame. Match both checked anchors and require
+        # energy throughout; do not resurrect an unrelated transient or breath.
+        valid = np.array([frame.frequency_hz > 0 for frame in checked])
+        proposals = [
+            checked[i] if valid[i] else original for i, original in enumerate(previous)
+        ]
+        rms = np.array([frame.rms for frame in previous])
+        retained, _ = recover_weak_vocal_hold(
+            valid, proposals, rms, np.zeros_like(rms), config
+        )
+        for index in np.flatnonzero(retained & ~valid):
+            checked[index] = proposals[index]
+        return refine_neural_pitch(
+            np.array([frame.frequency_hz for frame in checked]),
+            np.array([frame.confidence for frame in checked]),
+            np.array([frame.rms for frame in checked]),
+            config,
+        )
     if config.song_backend == "crepe":
         return neural_frames(samples, config, progress, device)
     return pyin_frames(samples, config, progress)
@@ -878,6 +918,9 @@ def analyze_stems(
     instrument_rms = _rms_grid(instruments, size, config.hop_size, count)
     hop = config.hop_size / config.sample_rate
     details = {"requested_content_mode": config.content_mode}
+    details["vocal_pitch_backend"] = (
+        config.song_backend if config.content_mode != "instrumental" else "unused"
+    )
     aliases = 0
     if config.content_mode == "instrumental":
         voices = [PitchFrame(0, 0, 0) for _ in range(count)]

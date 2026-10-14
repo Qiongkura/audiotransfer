@@ -101,7 +101,7 @@ class DesktopTests(unittest.TestCase):
                 (result.project / "desktop-job.json").read_text(encoding="utf-8")
             )
             self.assertEqual(meta["requested_content_mode"], "instrumental")
-            self.assertEqual(meta["converter_version"], "0.3.1")
+            self.assertEqual(meta["converter_version"], "0.3.2")
 
     def test_missing_or_incomplete_result_cannot_be_flashed(self):
         with tempfile.TemporaryDirectory() as folder:

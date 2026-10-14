@@ -10,6 +10,7 @@ import threading
 import time
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
+from . import __version__
 from .desktop import (
     ROOT,
     STAGES,
@@ -34,7 +35,7 @@ def duration(ms):
 class StudioApp:
     def __init__(self, root, output=None):
         self.root = root
-        root.title("AudioTransfer Studio · 旋律工坊 · v0.3.1")
+        root.title(f"AudioTransfer Studio · 旋律工坊 · v{__version__}")
         root.geometry("1180x860")
         root.minsize(1080, 830)
         root.configure(bg=BG)
@@ -121,7 +122,7 @@ class StudioApp:
         for text, size, color, pady in [
             ("◈", 38, CYAN, (26, 0)),
             ("AudioTransfer", 17, INK, 0),
-            ("S T U D I O   /   0.3.1", 9, MUTED, (6, 32)),
+            (f"S T U D I O   /   {__version__}", 9, MUTED, (6, 32)),
             ("♫   旋律工坊", 12, CYAN, 0),
             ("从一首歌，到一个小舞台", 9, MUTED, (10, 32)),
         ]:

@@ -232,6 +232,30 @@ def stable_song_notes(
                 pending = None
         else:
             pending = None
+    # Follow the observed vocal notes as a sequence. Confidence alone does not
+    # establish that a fleeting pitch is a separate sung note.
+    mask = np.array(
+        [
+            midi is not None
+            and (not analysis.sources or analysis.sources[i] == "vocals")
+            for i, midi in enumerate(labels)
+        ]
+    )
+    edges = np.flatnonzero(np.diff(np.r_[False, mask, False]))
+    changed = 0
+    for start, stop in zip(edges[::2], edges[1::2]):
+        observed = np.array(labels[start:stop], dtype=int)
+        confidence = np.array([f.confidence for f in analysis.frames[start:stop]])
+        attacks = {i - start for i in analysis.onsets if start <= i < stop}
+        decoded = _decode_vocal_note_path(observed, confidence, attacks, hop_ms)
+        changed += int(np.count_nonzero(decoded != observed))
+        labels[start:stop] = decoded.tolist()
+    if np.any(mask):
+        analysis.details.update(
+            vocal_note_decoder="confidence_weighted_observed_note_path",
+            vocal_note_context_ms=200,
+            regularized_vocal_ms=round(changed * hop_ms),
+        )
     return [
         (
             NoteFrame("rest", 0, 0)
@@ -244,6 +268,58 @@ def stable_song_notes(
         )
         for index, midi in enumerate(labels)
     ]
+
+
+def _decode_vocal_note_path(
+    observed: np.ndarray, confidence: np.ndarray, attacks: set[int], hop_ms: float
+) -> np.ndarray:
+    """Choose a continuous sung-note path without proposing new pitches.
+
+    Weak short islands should not outweigh their reliable surrounding melody.
+    Strong short notes and clear attacks can pay the change cost. Candidate
+    notes must be observed within 200 ms, and callers split at rests and source
+    boundaries; the decoder cannot borrow accompaniment or fill real silence.
+    """
+    from scipy.ndimage import maximum_filter1d
+
+    states = np.unique(observed)
+    if len(states) <= 1:
+        return observed.copy()
+    distance = np.abs(states[:, None] - states[None, :])
+    transition = 1.7 + 0.1 * np.minimum(distance, 12)
+    np.fill_diagonal(transition, 0.0)
+    weights = np.clip(np.nan_to_num(confidence, nan=0), 0, 1) ** 3
+    emission = (
+        np.minimum((observed[:, None] - states[None, :]) ** 2, 3.0)
+        * weights[:, None]
+        * hop_ms
+        / 20
+    )
+    context = max(1, round(200 / hop_ms))
+    available = maximum_filter1d(
+        observed[:, None] == states[None, :],
+        size=2 * context + 1,
+        axis=0,
+        mode="constant",
+        cval=0,
+    )
+    emission[~available] = np.inf
+    attacked = np.zeros(len(observed), dtype=bool)
+    margin = max(1, round(40 / hop_ms))
+    for index in attacks:
+        attacked[max(0, index - margin) : min(len(observed), index + margin + 1)] = True
+    score = emission[0]
+    back = np.zeros((len(observed), len(states)), dtype=np.uint8)
+    for index in range(1, len(observed)):
+        options = score[:, None] + transition * (0.35 if attacked[index] else 1.0)
+        back[index] = options.argmin(axis=0)
+        score = options.min(axis=0) + emission[index]
+    state = int(score.argmin())
+    path = np.empty_like(observed)
+    for index in range(len(observed) - 1, -1, -1):
+        path[index] = states[state]
+        state = int(back[index, state])
+    return path
 
 
 def events_from_song(

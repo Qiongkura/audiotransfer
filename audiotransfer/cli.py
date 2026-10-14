@@ -140,9 +140,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--song-backend",
-        choices=("crepe", "pyin"),
-        default="crepe",
-        help="完整歌曲音高识别；默认 crepe，pyin 为旧版",
+        choices=("rmvpe", "crepe", "pyin"),
+        default="rmvpe",
+        help="完整歌曲音高识别；默认 rmvpe 人声核验，crepe / pyin 为兼容选项",
     )
     parser.add_argument(
         "--content-mode",
