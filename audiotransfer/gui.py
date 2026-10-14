@@ -13,6 +13,7 @@ from tkinter import filedialog, messagebox, ttk
 from .desktop import (
     ROOT,
     STAGES,
+    CONTENT_MODES,
     ConversionRequest,
     WavePreview,
     audio_labels,
@@ -33,9 +34,9 @@ def duration(ms):
 class StudioApp:
     def __init__(self, root, output=None):
         self.root = root
-        root.title("AudioTransfer Studio · 旋律工坊")
-        root.geometry("1180x820")
-        root.minsize(1080, 790)
+        root.title("AudioTransfer Studio · 旋律工坊 · v0.3.1")
+        root.geometry("1180x860")
+        root.minsize(1080, 830)
         root.configure(bg=BG)
         self.messages = queue.Queue()
         self.source = self.result = None
@@ -51,6 +52,7 @@ class StudioApp:
         self.artist = tk.StringVar()
         self.controller = tk.StringVar(value="ssd1306")
         self.mode = tk.StringVar(value="song")
+        self.content_mode = tk.StringVar(value="自动识别")
         self.status = tk.StringVar(value="准备好，把喜欢的歌放进来。")
         self.detail = tk.StringVar(value="完整歌曲 → 主旋律 → 开发板播放")
         self.counter = tk.StringVar(value="等待导入")
@@ -60,7 +62,13 @@ class StudioApp:
         self.preview_time = tk.StringVar(value="00:00 / 00:00")
         self.badge = tk.StringVar(value="●  待导入")
         self._build()
-        for var in (self.title, self.artist, self.controller, self.mode):
+        for var in (
+            self.title,
+            self.artist,
+            self.controller,
+            self.mode,
+            self.content_mode,
+        ):
             var.trace_add("write", self._invalidate)
         self._enable_drop()
         root.bind("<Control-o>", lambda _: self.choose())
@@ -113,7 +121,7 @@ class StudioApp:
         for text, size, color, pady in [
             ("◈", 38, CYAN, (26, 0)),
             ("AudioTransfer", 17, INK, 0),
-            ("S T U D I O   /   0.3", 9, MUTED, (6, 32)),
+            ("S T U D I O   /   0.3.1", 9, MUTED, (6, 32)),
             ("♫   旋律工坊", 12, CYAN, 0),
             ("从一首歌，到一个小舞台", 9, MUTED, (10, 32)),
         ]:
@@ -193,6 +201,29 @@ class StudioApp:
             )
             entry.pack(fill="x")
             self.entries.append(entry)
+        types = tk.Frame(body, bg=BG)
+        types.pack(fill="x", pady=(12, 0))
+        self.label(types, "音频类型", 10, MUTED).pack(side="left", padx=(0, 16))
+        self.content_buttons = []
+        for name in CONTENT_MODES:
+            button = tk.Radiobutton(
+                types,
+                text=name,
+                variable=self.content_mode,
+                value=name,
+                bg=BG,
+                fg=INK,
+                selectcolor=CARD,
+                activebackground=BG,
+                activeforeground=CYAN,
+                font=(FONT, 11),
+                relief="flat",
+                highlightthickness=0,
+                cursor="hand2",
+                padx=8,
+            )
+            button.pack(side="left", padx=(0, 14))
+            self.content_buttons.append(button)
         actions = tk.Frame(body, bg=BG)
         actions.pack(fill="x", pady=(18, 17))
         self.convert_button = self.button(
@@ -346,6 +377,10 @@ class StudioApp:
         self.detail.set("完整歌曲 → 主旋律 → 开发板播放")
         if self.source:
             self.status.set("设置已更新，请重新转换。")
+        for button in self.content_buttons:
+            button.configure(
+                state="normal" if self.mode.get() == "song" else "disabled"
+            )
 
     def _set_busy(self, value):
         self.busy = value
@@ -353,6 +388,10 @@ class StudioApp:
             b.configure(state="disabled" if value else "normal")
         for e in self.entries:
             e.configure(state="readonly" if value else "normal")
+        for button in self.content_buttons:
+            button.configure(
+                state="disabled" if value or self.mode.get() != "song" else "normal"
+            )
         for b in (self.flash_button, self.play_button, self.folder_button):
             b.configure(state="normal" if self.result and not value else "disabled")
 
@@ -373,6 +412,7 @@ class StudioApp:
             self.artist.get(),
             self.controller.get(),
             self.mode.get(),
+            CONTENT_MODES[self.content_mode.get()],
         )
         self.result = None
         self._begin("convert")
@@ -450,7 +490,7 @@ class StudioApp:
                             f"00:00 / {duration(payload.duration_ms)}"
                         )
                         self.detail.set(
-                            f"{payload.event_count} 个音符事件 · 全长 {duration(payload.duration_ms)} · 可先试听，再一键烧录"
+                            f"识别类型：{dict(vocal='有演唱', instrumental='纯音乐', monophonic='单旋律').get(payload.detected_content_mode, '自动')} · {payload.event_count} 个事件 · 全长 {duration(payload.duration_ms)} · 可先试听，再烧录"
                         )
                     else:
                         self.detail.set(
@@ -646,6 +686,9 @@ def main():
     parser.add_argument("--file", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument(
+        "--content-mode", choices=("auto", "vocal", "instrumental"), default="auto"
+    )
+    parser.add_argument(
         "--advanced", action="store_true", help="打开原有 Arduino / STM32 参数界面"
     )
     args = parser.parse_args()
@@ -662,6 +705,13 @@ def main():
         except (ImportError, tk.TclError):
             root = tk.Tk()
         app = StudioApp(root, args.output)
+        app.content_mode.set(
+            next(
+                name
+                for name, mode in CONTENT_MODES.items()
+                if mode == args.content_mode
+            )
+        )
         if args.file:
             try:
                 app.select(args.file)

@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 AUDIO_SUFFIXES = {".mp3", ".wav", ".flac", ".m4a", ".aac", ".ogg", ".opus", ".wma"}
 CHATANG_SHA256 = "2b34f483a9b57082300ce296988bfc6cbdfca94711a691bf0d7b34b0cad11e4b"
 STAGES = ("检查音频", "分离人声与伴奏", "提取完整旋律", "整理节奏", "生成播放器")
+CONTENT_MODES = {"自动识别": "auto", "有演唱": "vocal", "纯音乐": "instrumental"}
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,7 @@ class ConversionRequest:
     artist: str = "未知歌手"
     controller: str = "ssd1306"
     mode: str = "song"
+    content_mode: str = "auto"
 
 
 def digest(path: Path) -> str:
@@ -87,6 +89,7 @@ class DesktopResult:
     duration_ms: int
     event_count: int
     source_sha256: str
+    detected_content_mode: str = "auto"
 
     def validate_for_flash(self) -> None:
         manifest = self.project / "desktop-job.json"
@@ -109,6 +112,8 @@ def convert(
     source = validate_audio(request.source)
     if request.mode not in ("song", "tracked"):
         raise ValueError("请选择完整歌曲或单旋律模式。")
+    if request.content_mode not in CONTENT_MODES.values():
+        raise ValueError("请选择自动识别、有演唱或纯音乐。")
     title, artist = request.title.strip(), request.artist.strip() or "未知歌手"
     if not title:
         raise ValueError("请填写歌名。")
@@ -124,7 +129,11 @@ def convert(
     from .pipeline import process_file
     from .player import write_player_project
 
-    if signature == CHATANG_SHA256 and request.mode == "song":
+    if (
+        signature == CHATANG_SHA256
+        and request.mode == "song"
+        and request.content_mode != "instrumental"
+    ):
         # A fingerprint, never the filename, selects this recording's reviewed score.
         import numpy as np
         from .scored_song import build
@@ -137,6 +146,9 @@ def convert(
         )
         with np.load(example / "song-analysis.npz", allow_pickle=False) as analysis:
             events, strengths, metadata = build(profile, baseline, analysis, 12)
+        metadata.update(
+            requested_content_mode=request.content_mode, detected_content_mode="vocal"
+        )
         report(JobProgress(3, "保留校对后的演唱、前奏、间奏与尾奏"))
         write_outputs(
             events,
@@ -174,7 +186,9 @@ def convert(
         process_file(
             source,
             raw,
-            config=AnalysisConfig(pitch_mode=request.mode),
+            config=AnalysisConfig(
+                pitch_mode=request.mode, content_mode=request.content_mode
+            ),
             min_note_ms=80,
             gap_ms=12,
             target="platformio-stm32",
@@ -183,11 +197,25 @@ def convert(
             active_low=True,
             arrangement="score",
             progress=forward,
+            separation_cache_dir=request.output_root,
         )
     report(JobProgress(4, "生成中文屏幕、音量键和暂停键固件"))
     write_player_project(
         raw, project, title=title, artist=artist, controller=request.controller
     )
+    diagnostic = raw / "source-regions.json"
+    if diagnostic.is_file():
+        shutil.copy2(diagnostic, project / diagnostic.name)
+        resolved = json.loads(diagnostic.read_text(encoding="utf-8"))[
+            "detected_content_mode"
+        ]
+    elif request.mode == "tracked":
+        resolved = "monophonic"
+    else:
+        playback = json.loads((raw / "playback.json").read_text(encoding="utf-8"))
+        resolved = (playback.get("arrangement") or {}).get(
+            "detected_content_mode", request.content_mode
+        )
     after = source.stat()
     if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
         raise ValueError("转换期间原音频发生变化，请重新转换。")
@@ -210,13 +238,18 @@ def convert(
         source_name=source.name,
         duration_ms=duration,
         event_count=len(notes),
+        requested_content_mode=request.content_mode,
+        detected_content_mode=resolved,
+        converter_version="0.3.1",
         files=project_hashes(project),
     )
     (project / "desktop-job.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     report(JobProgress(4, "转换完成，可以试听或烧录", 100))
-    return DesktopResult(project, preview, title, duration, len(notes), signature)
+    return DesktopResult(
+        project, preview, title, duration, len(notes), signature, resolved
+    )
 
 
 def platformio_command() -> list[str]:
@@ -286,7 +319,9 @@ def _flash_project(
                 lines.append(line)
                 if "Uploading " in line or "Programming Started" in line:
                     stage = max(stage, 3)
-                elif "Linking " in line or "Building " in line:
+                elif "Linking " in line or (
+                    "Building " in line and "firmware.bin" in line
+                ):
                     stage = max(stage, 2)
                 elif "Compiling " in line:
                     stage = max(stage, 1)

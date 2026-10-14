@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "audiotransfer"
-version = "0.3.0"
+version = "0.3.1"
 description = "Extract a monophonic melody and generate Arduino or STM32 PlatformIO firmware"
 readme = "README.md"
 requires-python = ">=3.10"

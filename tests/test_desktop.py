@@ -25,6 +25,7 @@ class DesktopTests(unittest.TestCase):
 
             def extract(src, output, **options):
                 self.assertEqual(options["config"].pitch_mode, "song")
+                self.assertEqual(options["config"].content_mode, "auto")
                 self.assertEqual(options["target"], "platformio-stm32")
                 self.assertEqual(options["sound_mode"], "pulse")
                 self.assertTrue(options["active_low"])
@@ -57,6 +58,50 @@ class DesktopTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "重新转换"):
                     flash(result, lambda _: None)
                 process.assert_not_called()
+
+    def test_desktop_passes_manual_content_mode_and_records_detected_result(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            source = root / "music.wav"
+            source.write_bytes(b"fixture")
+
+            def extract(src, output, **options):
+                self.assertEqual(options["config"].content_mode, "instrumental")
+                self.assertEqual(options["separation_cache_dir"], root / "out")
+                paths = write_outputs(
+                    [NoteEvent(440, 300, "A4")],
+                    output,
+                    target="platformio-stm32",
+                    sound_mode="pulse",
+                    active_low=True,
+                )
+                (Path(output) / "source-regions.json").write_text(
+                    json.dumps(
+                        dict(
+                            requested_content_mode="instrumental",
+                            detected_content_mode="instrumental",
+                            regions=[],
+                        )
+                    ),
+                    encoding="utf-8",
+                )
+                return paths
+
+            with patch("audiotransfer.pipeline.process_file", side_effect=extract):
+                result = convert(
+                    ConversionRequest(
+                        source, root / "out", "纯音乐", content_mode="instrumental"
+                    ),
+                    lambda _: None,
+                )
+            self.assertEqual(result.detected_content_mode, "instrumental")
+            self.assertTrue((result.project / "source-regions.json").is_file())
+            result.validate_for_flash()
+            meta = json.loads(
+                (result.project / "desktop-job.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(meta["requested_content_mode"], "instrumental")
+            self.assertEqual(meta["converter_version"], "0.3.1")
 
     def test_missing_or_incomplete_result_cannot_be_flashed(self):
         with tempfile.TemporaryDirectory() as folder:

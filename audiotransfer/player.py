@@ -105,7 +105,10 @@ def write_player_project(source: Path, output: Path, *, title: str = '茶汤', a
     (src / 'player_config.h').write_text(config, encoding='utf-8')
     ini = result.platformio_ini_path.read_text(encoding='utf-8')
     # Wire uses this timeout in its STM32 bus driver, including address probes.
-    result.platformio_ini_path.write_text(ini + 'build_flags = -DI2C_TIMEOUT_TICK=5\n', encoding='utf-8')
+    # PlatformIO also passes debug_speed to OpenOCD for ST-Link uploads.
+    # Use the speed verified with this board and its SWD wiring.
+    result.platformio_ini_path.write_text(
+        ini + 'debug_speed = 100\nbuild_flags = -DI2C_TIMEOUT_TICK=5\n', encoding='utf-8')
     screen = {'title': title, 'artist': artist, 'width': 128, 'height': 64, 'controller': controller,
               'addresses': ['0x3C', '0x3D'], 'scl': pins[0], 'sda': pins[1],
               'volume_up': pins[2], 'volume_down': pins[3], 'pause': pins[4], 'key_active_level': 'LOW',

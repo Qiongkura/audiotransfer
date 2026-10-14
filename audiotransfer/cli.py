@@ -13,7 +13,6 @@ from .output import validate_board, validate_stm32_pin, validate_upload_protocol
 from .pipeline import PlatformIOUploadError, process_file, upload_platformio
 from .song import SongAnalysisError
 
-
 TARGET_ARDUINO = "arduino"
 TARGET_PLATFORMIO_STM32 = "platformio-stm32"
 
@@ -88,23 +87,85 @@ def build_parser() -> argparse.ArgumentParser:
         default="pio",
         help="PlatformIO 命令名或完整路径，默认 pio",
     )
-    parser.add_argument("--gap-ms", type=_nonnegative_int, default=6, help="音符内部停顿上限，默认 6 ms；不延长歌曲")
-    parser.add_argument("--sound-mode", choices=("auto", "soft", "classic", "harmonic", "pulse"), default="auto", help="soft柔和、harmonic丰满、pulse音符PWM、classic原方波")
-    parser.add_argument("--active-low", action="store_true", help="用于已确认低电平驱动的STM32蜂鸣器模块，HIGH为关闭")
-    parser.add_argument("--arrangement", choices=("score", "raw"), default="score", help="完整歌曲默认整理节拍及滑音，raw 保留识别音符")
-    parser.add_argument("--transpose", type=int, help="完整歌曲编排移调半音数；默认自动选择蜂鸣器音域，0 保持原调")
-    parser.add_argument("--score-profile", type=Path, help="可选：使用这首歌已校对的乐谱JSON，校谱模式默认保持原音区")
+    parser.add_argument(
+        "--gap-ms",
+        type=_nonnegative_int,
+        default=6,
+        help="音符内部停顿上限，默认 6 ms；不延长歌曲",
+    )
+    parser.add_argument(
+        "--sound-mode",
+        choices=("auto", "soft", "classic", "harmonic", "pulse"),
+        default="auto",
+        help="soft柔和、harmonic丰满、pulse音符PWM、classic原方波",
+    )
+    parser.add_argument(
+        "--active-low",
+        action="store_true",
+        help="用于已确认低电平驱动的STM32蜂鸣器模块，HIGH为关闭",
+    )
+    parser.add_argument(
+        "--arrangement",
+        choices=("score", "raw"),
+        default="score",
+        help="完整歌曲默认整理节拍及滑音，raw 保留识别音符",
+    )
+    parser.add_argument(
+        "--transpose",
+        type=int,
+        help="完整歌曲编排移调半音数；默认自动选择蜂鸣器音域，0 保持原调",
+    )
+    parser.add_argument(
+        "--score-profile",
+        type=Path,
+        help="可选：使用这首歌已校对的乐谱JSON，校谱模式默认保持原音区",
+    )
     parser.add_argument("--sample-rate", type=_positive_int, default=16_000)
     parser.add_argument("--frame-ms", type=_positive_int, default=40)
     parser.add_argument("--hop-ms", type=_positive_int, default=20)
-    parser.add_argument("--speed", type=_positive_float, default=1.0, help="播放速度，默认 1.0")
-    parser.add_argument("--pitch-mode", choices=("song", "tracked", "legacy"), default="song", help="song 为完整歌曲模式（默认），tracked/legacy 为轻量模式")
-    parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto", help="人声分离设备；默认自动选择显卡或 CPU")
-    parser.add_argument("--song-backend", choices=("crepe", "pyin"), default="crepe", help="完整歌曲音高识别；默认 crepe，pyin 为旧版")
-    parser.add_argument("--candidate-count", type=_positive_int, default=5, help="主旋律候选数，默认 5")
-    parser.add_argument("--tracking-min-frequency-hz", type=_positive_int, default=140, help="主旋律最低频率，默认 140 Hz")
+    parser.add_argument(
+        "--speed", type=_positive_float, default=1.0, help="播放速度，默认 1.0"
+    )
+    parser.add_argument(
+        "--pitch-mode",
+        choices=("song", "tracked", "legacy"),
+        default="song",
+        help="song 为完整歌曲模式（默认），tracked/legacy 为轻量模式",
+    )
+    parser.add_argument(
+        "--device",
+        choices=("auto", "cpu", "cuda"),
+        default="auto",
+        help="人声分离设备；默认自动选择显卡或 CPU",
+    )
+    parser.add_argument(
+        "--song-backend",
+        choices=("crepe", "pyin"),
+        default="crepe",
+        help="完整歌曲音高识别；默认 crepe，pyin 为旧版",
+    )
+    parser.add_argument(
+        "--content-mode",
+        choices=("auto", "vocal", "instrumental"),
+        default="auto",
+        help="完整歌曲类型：auto整曲判断、vocal有演唱、instrumental纯音乐",
+    )
+    parser.add_argument(
+        "--candidate-count", type=_positive_int, default=5, help="主旋律候选数，默认 5"
+    )
+    parser.add_argument(
+        "--tracking-min-frequency-hz",
+        type=_positive_int,
+        default=140,
+        help="主旋律最低频率，默认 140 Hz",
+    )
     parser.add_argument("--min-note-ms", type=int, default=80)
-    parser.add_argument("--max-notes", type=_nonnegative_int, default=0, help="最多输出的事件数；0 表示保留全曲（默认）")
+    parser.add_argument(
+        "--max-notes",
+        type=_nonnegative_int,
+        default=0,
+        help="最多输出的事件数；0 表示保留全曲（默认）",
+    )
     parser.add_argument("--min-frequency-hz", type=_positive_int, default=55)
     parser.add_argument("--max-frequency-hz", type=_positive_int, default=1000)
     parser.add_argument("--energy-threshold", type=_nonnegative_float, default=0.01)
@@ -147,6 +208,7 @@ def main(argv: list[str] | None = None) -> int:
         candidate_count=args.candidate_count,
         tracking_min_frequency_hz=args.tracking_min_frequency_hz,
         song_backend=args.song_backend,
+        content_mode=args.content_mode,
     )
     try:
         paths = process_file(

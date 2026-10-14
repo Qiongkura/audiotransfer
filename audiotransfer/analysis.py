@@ -54,6 +54,7 @@ class AnalysisConfig:
     tracking_octave_penalty: float = 0.80
     tracking_rest_penalty: float = 2.0
     song_backend: str = "crepe"
+    content_mode: str = "auto"
 
     @property
     def frame_size(self) -> int:
@@ -70,7 +71,10 @@ class AnalysisConfig:
             raise ValueError("frame_ms 和 hop_ms 必须为正数")
         if not math.isfinite(self.min_frequency_hz) or self.min_frequency_hz <= 0:
             raise ValueError("min_frequency_hz 必须为正数")
-        if not math.isfinite(self.max_frequency_hz) or self.max_frequency_hz <= self.min_frequency_hz:
+        if (
+            not math.isfinite(self.max_frequency_hz)
+            or self.max_frequency_hz <= self.min_frequency_hz
+        ):
             raise ValueError("max_frequency_hz 必须大于 min_frequency_hz")
         if not math.isfinite(self.energy_threshold) or self.energy_threshold < 0:
             raise ValueError("energy_threshold 不能为负数")
@@ -85,9 +89,14 @@ class AnalysisConfig:
             raise ValueError("pitch_mode 必须是 song、legacy 或 tracked")
         if self.song_backend not in {"crepe", "pyin"}:
             raise ValueError("song_backend 必须是 crepe 或 pyin")
+        if self.content_mode not in {"auto", "vocal", "instrumental"}:
+            raise ValueError("content_mode 必须是 auto、vocal 或 instrumental")
         if self.candidate_count <= 0:
             raise ValueError("candidate_count 必须为正数")
-        if not math.isfinite(self.tracking_min_frequency_hz) or self.tracking_min_frequency_hz <= 0:
+        if (
+            not math.isfinite(self.tracking_min_frequency_hz)
+            or self.tracking_min_frequency_hz <= 0
+        ):
             raise ValueError("tracking_min_frequency_hz 必须为正数")
         for name, value in (
             ("tracking_continuity_weight", self.tracking_continuity_weight),
@@ -136,8 +145,8 @@ def _autocorrelation_local_peaks(
     finite = np.isfinite(left) & np.isfinite(center) & np.isfinite(right)
     # Permit a flat side of a sampled peak, but reject a completely flat
     # plateau; at least one side must be strictly lower.
-    local_maximum = (center >= left) & (center >= right) & (
-        (center > left) | (center > right)
+    local_maximum = (
+        (center >= left) & (center >= right) & ((center > left) | (center > right))
     )
     return indices[finite & local_maximum]
 
@@ -183,7 +192,9 @@ def estimate_pitch(
         return PitchFrame(0.0, 0.0, rms)
     peak_index = int(peak_indices[np.argmax(autocorrelation[peak_indices])])
     peak_position = _parabolic_peak(autocorrelation, peak_index)
-    peak_value = float(np.interp(peak_position, np.arange(len(autocorrelation)), autocorrelation))
+    peak_value = float(
+        np.interp(peak_position, np.arange(len(autocorrelation)), autocorrelation)
+    )
     if peak_position <= 0 or peak_value <= 0:
         return PitchFrame(0.0, 0.0, rms)
     frequency = float(sample_rate / peak_position)
@@ -299,7 +310,10 @@ def estimate_pitch_candidates(
     for candidate in sorted(candidates, key=lambda item: item.score, reverse=True):
         duplicate = False
         for existing in deduplicated:
-            if abs(12.0 * math.log2(candidate.frequency_hz / existing.frequency_hz)) < 0.5:
+            if (
+                abs(12.0 * math.log2(candidate.frequency_hz / existing.frequency_hz))
+                < 0.5
+            ):
                 duplicate = True
                 break
         if not duplicate:
@@ -350,7 +364,9 @@ def _candidate_frames(
             candidate_count=config.candidate_count,
             tracking_min_frequency_hz=config.tracking_min_frequency_hz,
         )
-        candidates = tuple(c for c in candidates if c.confidence >= config.confidence_threshold)
+        candidates = tuple(
+            c for c in candidates if c.confidence >= config.confidence_threshold
+        )
         frames.append(CandidateFrame(candidates=candidates, rms=_frame_rms(frame)))
     return frames
 
@@ -376,9 +392,7 @@ def _tracking_transition(
         return 0.0
     if previous is None or current is None:
         return -0.5 * config.tracking_rest_penalty
-    semitones = abs(
-        12.0 * math.log2(current.frequency_hz / previous.frequency_hz)
-    )
+    semitones = abs(12.0 * math.log2(current.frequency_hz / previous.frequency_hz))
     penalty = config.tracking_continuity_weight * min(semitones, 24.0)
     octave_distance = abs(semitones - 12.0)
     if octave_distance <= 1.5:
@@ -400,7 +414,9 @@ def analyze_samples_tracked(
     return track_pitch_candidates(candidate_frames, config)
 
 
-def track_pitch_candidates(candidate_frames: list[CandidateFrame], config: AnalysisConfig) -> list[PitchFrame]:
+def track_pitch_candidates(
+    candidate_frames: list[CandidateFrame], config: AnalysisConfig
+) -> list[PitchFrame]:
     """Select a continuous path from externally supplied pitch candidates."""
     if not candidate_frames:
         return []
@@ -484,10 +500,16 @@ def _fold_isolated_octaves(
             continue
         if not all(
             math.isfinite(value)
-            for value in (previous.frequency_hz, current.frequency_hz, following.frequency_hz)
+            for value in (
+                previous.frequency_hz,
+                current.frequency_hz,
+                following.frequency_hz,
+            )
         ):
             continue
-        neighbors_semitones = abs(12.0 * math.log2(previous.frequency_hz / following.frequency_hz))
+        neighbors_semitones = abs(
+            12.0 * math.log2(previous.frequency_hz / following.frequency_hz)
+        )
         if neighbors_semitones > neighbor_tolerance:
             continue
         reference = math.sqrt(previous.frequency_hz * following.frequency_hz)
@@ -503,7 +525,9 @@ def _fold_isolated_octaves(
     return result
 
 
-def analyze_samples(samples: np.ndarray, config: AnalysisConfig | None = None) -> list[PitchFrame]:
+def analyze_samples(
+    samples: np.ndarray, config: AnalysisConfig | None = None
+) -> list[PitchFrame]:
     """Analyze an array of mono float samples using overlapping frames.
 
     Empty or shorter-than-one-frame input returns an empty list.  The caller can

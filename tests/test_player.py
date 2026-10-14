@@ -29,6 +29,8 @@ class PlayerExportTests(unittest.TestCase):
             self.assertEqual(settings['title'], '茶汤')
             self.assertEqual(settings['artist'], '郁可唯')
             self.assertEqual(settings['pause'], 'PA2')
+            ini = (output / 'platformio.ini').read_text(encoding='utf-8')
+            self.assertIn('debug_speed = 100\n', ini)
             main = (output / 'src/main.cpp').read_text(encoding='utf-8')
             self.assertIn('playerUi.musicNow()', main)
             self.assertIn('if (playerUi.paused())', main)
