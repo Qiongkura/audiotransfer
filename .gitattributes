@@ -8,5 +8,6 @@
 *.ini text eol=lf
 *.bat text eol=crlf
 *.bin binary
+*.exe binary
 *.mid binary
 *.npz binary

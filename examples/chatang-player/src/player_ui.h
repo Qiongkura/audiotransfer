@@ -8,12 +8,16 @@
 
 volatile uint32_t volumePercent = 50;
 volatile uint32_t playbackElapsedMs = 0;
+volatile uint32_t playbackPaused = 0;
 volatile uint32_t displayFrames = 0, displayFailures = 0;
 volatile uint32_t oledAddress = 0, oledReady = 0;
 uint32_t envelopeLevelQ15 = 0;
 
 class PlayerUi {
   PlayerLogic::Controls controls;
+  PlayerLogic::ToggleKey pauseKey;
+  PlayerLogic::PlaybackClock clock;
+  uint32_t resumedAt = 0;
   uint8_t frame[1024] = {};
   uint16_t sent = 1024;
   bool addressPending = true, playing = false;
@@ -86,7 +90,9 @@ class PlayerUi {
     rectangle(3, 56, 122, 7, false);
     const uint16_t width = PlayerLogic::progress(playbackElapsedMs, PLAYER_DURATION_MS, 118);
     rectangle(5, 58, width, 3, true);
-    if (playing) {
+    if (playing && clock.paused) {
+      rectangle(116, 4, 2, 11, true); rectangle(121, 4, 2, 11, true);
+    } else if (playing) {
       for (int col = 0; col < 6; ++col) rectangle(116 + col, 4 + col, 1, 11 - 2 * col, true);
     }
   }
@@ -95,6 +101,7 @@ public:
   void begin() {
     pinMode(PLAYER_VOLUME_UP, INPUT_PULLUP);
     pinMode(PLAYER_VOLUME_DOWN, INPUT_PULLUP);
+    pinMode(PLAYER_PAUSE, INPUT_PULLUP);
     Wire.setSCL(PLAYER_SCL);
     Wire.setSDA(PLAYER_SDA);
     Wire.begin();
@@ -102,15 +109,27 @@ public:
     connect(millis());
   }
   void start(uint32_t now) {
+    clock.start(); playbackPaused = 0; resumedAt = now;
     epoch = now; playing = true; playbackElapsedMs = 0;
     nextFrame = now;
   }
   void finish() { playing = false; playbackElapsedMs = PLAYER_DURATION_MS; }
-  uint32_t gain(uint32_t rawGain) const { return controls.gain(rawGain); }
+  bool paused() const { return clock.paused; }
+  uint32_t musicNow() const { return clock.musicNow(millis()); }
+  uint32_t gain(uint32_t rawGain) const {
+    if (clock.paused) return 0;
+    const uint32_t age = uint32_t(millis() - resumedAt);
+    return controls.gain(age >= 20 ? rawGain : uint32_t(uint64_t(rawGain) * age / 20));
+  }
   void poll(uint32_t now, uint32_t budgetMs = 20) {
     controls.poll(digitalRead(PLAYER_VOLUME_UP) == LOW, digitalRead(PLAYER_VOLUME_DOWN) == LOW, now);
     volumePercent = controls.percent;
-    if (playing) playbackElapsedMs = PlayerLogic::elapsed(now, epoch, PLAYER_DURATION_MS);
+    if (pauseKey.poll(digitalRead(PLAYER_PAUSE) == LOW, now) && playing) {
+      clock.toggle(now); playbackPaused = clock.paused;
+      if (!clock.paused) resumedAt = now;
+      nextFrame = now;
+    }
+    if (playing) playbackElapsedMs = PlayerLogic::elapsed(clock.musicNow(now), epoch, PLAYER_DURATION_MS);
     if (!oledReady) {
       if (PlayerLogic::due(now, nextFrame)) { draw(); nextFrame = now + 250; }
       // Probe only when there is enough time before the next audio boundary.

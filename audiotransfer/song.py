@@ -235,7 +235,13 @@ def separate_file(
                 report(f"分离进度：{percent}%")
                 previous_percent[0] = percent
     try:
-        separator = Separator(model="htdemucs", device=selected, shifts=0, callback=status)
+        # Native cached weights can be loaded directly, avoiding a needless hub
+        # request on each new recording. LocalRepo still verifies the checksum.
+        checkpoint_dir = models / "torch" / "checkpoints"
+        cached = checkpoint_dir / "955717e8-8726e21a.th"
+        separator = Separator(model="955717e8" if cached.is_file() else "htdemucs",
+                              repo=checkpoint_dir if cached.is_file() else None,
+                              device=selected, shifts=0, callback=status)
         with torch.inference_mode():
             _, separated = separator.separate_tensor(wav, sr=44_100)
     except Exception as exc:

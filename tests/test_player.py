@@ -28,6 +28,10 @@ class PlayerExportTests(unittest.TestCase):
             self.assertEqual(settings['duration_ms'], 607)
             self.assertEqual(settings['title'], '茶汤')
             self.assertEqual(settings['artist'], '郁可唯')
+            self.assertEqual(settings['pause'], 'PA2')
+            main = (output / 'src/main.cpp').read_text(encoding='utf-8')
+            self.assertIn('playerUi.musicNow()', main)
+            self.assertIn('if (playerUi.paused())', main)
             self.assertEqual((source / 'notes.json').read_text(encoding='utf-8'), original)
 
     def test_conflicting_pins_do_not_overwrite_existing_output(self):
@@ -37,7 +41,8 @@ class PlayerExportTests(unittest.TestCase):
             marker = output / 'notes.json'
             marker.write_text('preserve-existing-project', encoding='utf-8')
             for options in [dict(volume_up='PA8'), dict(volume_down='PA13'),
-                            dict(volume_up='PA0', volume_down='PA0'), dict(scl='PB7', sda='PB6')]:
+                            dict(volume_up='PA0', volume_down='PA0'), dict(scl='PB7', sda='PB6'),
+                            dict(pause='PA0'), dict(pause='PA8'), dict(pause='PA14')]:
                 with self.assertRaises(ValueError):
                     write_player_project(source, output, **options)
             self.assertEqual(marker.read_text(encoding='utf-8'), 'preserve-existing-project')

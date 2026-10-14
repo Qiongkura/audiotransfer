@@ -759,8 +759,11 @@ void playMelody(uint8_t mode) {
       configureCarrier(note.frequency_hz, mode);
     phaseStep = uint32_t((uint64_t(note.frequency_hz) << 32) / SAMPLE_RATE);
     const uint32_t initialColor2 = harmonic2Q15, initialColor3 = harmonic3Q15;
-    while (int32_t(millis() - deadline) < 0) {
-      const uint32_t elapsed = millis() - start;
+    while (int32_t(playerUi.musicNow() - deadline) < 0) {
+      const uint32_t uiMusicNow = playerUi.musicNow(); const int32_t uiRemaining = (note.frequency_hz && uint32_t(uiMusicNow - start) < sounding) ? int32_t(start + sounding - uiMusicNow) : int32_t(deadline - uiMusicNow); playerUi.poll(millis(), playerUi.paused() ? 20 : (uiRemaining > 0 ? uint32_t(uiRemaining) : 0));
+      if (playerUi.paused()) { gainQ15 = 0; *compareRegister = 0; delay(1); continue; }
+      if (int32_t(playerUi.musicNow() - deadline) >= 0) break;
+      const uint32_t elapsed = playerUi.musicNow() - start;
       if (note.frequency_hz && elapsed < sounding) {
         const uint32_t gain = envelopeGain(elapsed, sounding, note.velocity, continued, joinNext, initialGain);
         if (mode == 3) {
@@ -778,7 +781,6 @@ void playMelody(uint8_t mode) {
         gainQ15 = playerUi.gain(gain);
         if (mode == 4) *compareRegister = uint64_t(carrierTicks) * gainQ15 / 65534;
       } else silence();
-      const uint32_t uiNow = millis(); const int32_t uiRemaining = (note.frequency_hz && uint32_t(uiNow - start) < sounding) ? int32_t(start + sounding - uiNow) : int32_t(deadline - uiNow); playerUi.poll(uiNow, uiRemaining > 0 ? uint32_t(uiRemaining) : 0);
       delay(1);
     }
     if (!joinNext) silence();

@@ -1,6 +1,6 @@
 # STM32《茶汤》OLED 播放器
 
-这是本项目当前已编译并通过 ST-Link 校验的播放器。包含完整 308.773 秒的单声部旋律、2:50 附近的八小节间奏校正、128×64 SSD1306 I²C 屏幕，以及两个音量按键。开机音量为50%。
+这是本项目当前已编译的播放器。包含完整 308.773 秒的单声部旋律、2:50 附近的八小节间奏校正、128×64 SSD1306 I²C 屏幕、两个音量按键和一个播放暂停按键。开机音量为50%。本次新固件的构建及实物验证状态以 `firmware/verification.json` 为准。
 
 ## 接线
 
@@ -10,6 +10,7 @@
 | OLED SCL / SDA | PB6 / PB7 |
 | 音量＋按键 | PA0 与 GND 之间 |
 | 音量－按键 | PA1 与 GND 之间 |
+| 播放 / 暂停按键 | PA2 与 GND 之间 |
 | 蜂鸣器 VCC / IO / GND | 3.3V / PA8 / GND |
 
 默认用于低电平导通的三针无源蜂鸣器模块。按键使用内部上拉，按下接地。0～20%每次调1%，更高档位每次调5%；长按可连续调节，0%静音。屏幕显示歌名、歌手、播放时间、进度条和音量。
@@ -24,9 +25,9 @@ pio run -d examples/chatang-player
 pio run -d examples/chatang-player -t upload
 ```
 
-使用 ST-Link 连接 PA13/SWDIO、PA14/SWCLK、GND 与适配供电。`firmware/firmware.bin` 是本次已验证的编译结果，重新生成源码后该文件不会自动更新。
+使用 ST-Link 连接 PA13/SWDIO、PA14/SWCLK、GND 与适配供电。`firmware/firmware.bin` 是本次编译结果，重新生成源码后该文件不会自动更新。暂停键短按切换状态；暂停静音并冻结音符、时间和进度，再按继续当前音符。长按只触发一次，暂停时可以调整音量。
 
-本次构建：Flash 40372 字节、RAM 2260 字节，STM32 平台20.0.0、Arduino Core for STM32 3.0.0。`firmware/verification.json` 记录固件校验值。屏幕控制器不同时，可通过根目录说明中的播放器生成命令选择 SH1106；其初始化与列偏移已经在生成器中处理。
+本次构建：Flash 40760 字节、RAM 2288 字节，STM32 平台20.0.0、Arduino Core for STM32 3.0.0。`firmware/verification.json` 记录固件校验值及测试状态。屏幕控制器不同时，可通过根目录说明中的播放器生成命令选择 SH1106；其初始化与列偏移已经在生成器中处理。
 
 ## 重新生成
 

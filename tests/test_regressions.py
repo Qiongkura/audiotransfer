@@ -9,7 +9,7 @@ import numpy as np
 
 from audiotransfer.analysis import AnalysisConfig, analyze_samples_tracked, analyze_samples
 from audiotransfer.events import NoteEvent, NoteFrame, merge_note_frames
-from audiotransfer.gui import AudioTransferApp
+from audiotransfer.legacy_gui import AudioTransferApp
 from audiotransfer.output import write_outputs
 from audiotransfer.pipeline import events_from_samples
 from audiotransfer.preview import playback_gap, render_events
@@ -28,7 +28,7 @@ class RegressionTests(unittest.TestCase):
         app.start_button = SimpleNamespace(configure=lambda **_: None)
         app.status_var = SimpleNamespace(set=lambda _: None)
         app._append_log = lambda _: None
-        with patch('audiotransfer.gui.threading.Thread') as thread:
+        with patch('audiotransfer.legacy_gui.threading.Thread') as thread:
             app._start()
             thread.return_value.start.assert_called_once()
             self.assertEqual(thread.call_args.kwargs['args'][9], 'platformio-stm32')

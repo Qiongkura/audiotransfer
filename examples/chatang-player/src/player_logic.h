@@ -48,6 +48,34 @@ struct Key {
   }
 };
 
+// A transport key fires once per debounced press, without volume-key repeat.
+struct ToggleKey {
+  bool raw = false, pressed = false;
+  uint32_t changedAt = 0;
+  bool poll(bool level, uint32_t now) {
+    if (level != raw) { raw = level; changedAt = now; }
+    if (pressed != raw && uint32_t(now - changedAt) >= 25) {
+      pressed = raw;
+      return pressed;
+    }
+    return false;
+  }
+};
+
+struct PlaybackClock {
+  bool paused = false;
+  uint32_t pausedAt = 0, pausedTotal = 0;
+  void start() { paused = false; pausedAt = pausedTotal = 0; }
+  uint32_t musicNow(uint32_t wallNow) const {
+    return (paused ? pausedAt : wallNow) - pausedTotal;
+  }
+  void toggle(uint32_t now) {
+    if (paused) pausedTotal += uint32_t(now - pausedAt);
+    else pausedAt = now;
+    paused = !paused;
+  }
+};
+
 struct Controls {
   Key up, down;
   uint32_t percent = 50, scaleQ15 = 1036;

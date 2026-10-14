@@ -1,1 +1,1 @@
--e .[song,display]
+-e .[song,display,desktop]

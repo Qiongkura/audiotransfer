@@ -1,400 +1,672 @@
-"""Small Tkinter front end that runs analysis off the UI thread."""
+"""AudioTransfer Studio: responsive desktop workflow for the STM32 player."""
 
 from __future__ import annotations
-
-from pathlib import Path
+import argparse
 import math
 import os
+from pathlib import Path
 import queue
 import threading
+import time
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
+from .desktop import (
+    ROOT,
+    STAGES,
+    ConversionRequest,
+    WavePreview,
+    audio_labels,
+    convert,
+    flash,
+    validate_audio,
+)
 
-from .analysis import AnalysisConfig
-from .output import validate_board, validate_stm32_pin, validate_upload_protocol
-from .pipeline import process_file, upload_platformio
+BG, CARD, EDGE = "#0b1020", "#131d33", "#263552"
+INK, MUTED, CYAN, BLUE = "#edf4ff", "#8d9fbd", "#48e0d0", "#5987ff"
+FONT = "Microsoft YaHei UI"
 
 
-class AudioTransferApp:
-    def __init__(self, root: tk.Tk) -> None:
+def duration(ms):
+    return f"{ms // 60000:02d}:{ms // 1000 % 60:02d}"
+
+
+class StudioApp:
+    def __init__(self, root, output=None):
         self.root = root
-        self.root.title("AudioTransfer - 单旋律转 Arduino / STM32")
-        self.root.geometry("980x650")
-        self.messages: queue.Queue[tuple[str, object]] = queue.Queue()
-
-        self.input_var = tk.StringVar()
-        self.output_var = tk.StringVar(value=str(Path.cwd() / "out"))
-        self.ffmpeg_var = tk.StringVar(value="ffmpeg")
-        self.target_var = tk.StringVar(value="STM32 PlatformIO")
-        self.board_var = tk.StringVar(value="bluepill_f103c8")
-        self.stm32_pin_var = tk.StringVar(value="PA8")
-        self.pio_var = tk.StringVar(value="pio")
-        self.upload_protocol_var = tk.StringVar(value="stlink")
-        self.upload_var = tk.BooleanVar(value=False)
-        self.pitch_mode_var = tk.StringVar(value="完整歌曲（人声＋乐器）")
-        self.candidate_count_var = tk.StringVar(value="5")
-        self.tracking_min_frequency_var = tk.StringVar(value="140")
-        self.pin_var = tk.StringVar(value="8")
-        self.sample_rate_var = tk.StringVar(value="16000")
-        self.frame_ms_var = tk.StringVar(value="40")
-        self.hop_ms_var = tk.StringVar(value="20")
-        self.speed_var = tk.StringVar(value="1.0")
-        self.min_note_ms_var = tk.StringVar(value="80")
-        self.max_notes_var = tk.StringVar(value="0")
-        self.gap_ms_var = tk.StringVar(value="6")
-        self.sound_mode_var = tk.StringVar(value="柔和发声")
-        self.active_low_var = tk.BooleanVar(value=False)
-        self.arrange_var = tk.BooleanVar(value=True)
-        self.status_var = tk.StringVar(value="就绪")
-        self.start_button: ttk.Button | None = None
-        self.log_text: tk.Text | None = None
-        self.preview_path: Path | None = None
-        self.preview_button: ttk.Button | None = None
-        self._build_widgets()
-        self.root.after(100, self._poll_messages)
-
-    def _build_widgets(self) -> None:
-        root = self.root
-        root.columnconfigure(1, weight=1)
-        root.rowconfigure(8, weight=1)
-
-        def add_row(row: int, label: str, variable: tk.StringVar, browse: str | None = None) -> None:
-            ttk.Label(root, text=label).grid(row=row, column=0, padx=8, pady=6, sticky="w")
-            ttk.Entry(root, textvariable=variable).grid(row=row, column=1, padx=8, pady=6, sticky="ew")
-            if browse:
-                ttk.Button(
-                    root,
-                    text=browse,
-                    command=(self._choose_input if browse == "选择文件" else self._choose_output),
-                ).grid(row=row, column=2, padx=8, pady=6)
-
-        add_row(0, "输入 MP3/音频", self.input_var, "选择文件")
-        add_row(1, "输出目录", self.output_var, "选择目录")
-        add_row(2, "ffmpeg", self.ffmpeg_var)
-
-        target_frame = ttk.LabelFrame(root, text="输出目标与烧录")
-        target_frame.grid(row=3, column=0, columnspan=3, padx=8, pady=8, sticky="ew")
-        for column in range(6):
-            target_frame.columnconfigure(column, weight=1 if column in (1, 3, 5) else 0)
-        ttk.Label(target_frame, text="目标").grid(row=0, column=0, padx=4, pady=6, sticky="w")
-        ttk.Combobox(
-            target_frame,
-            textvariable=self.target_var,
-            values=("Arduino", "STM32 PlatformIO"),
-            state="readonly",
-            width=18,
-        ).grid(row=0, column=1, padx=4, pady=6, sticky="ew")
-        ttk.Label(target_frame, text="board").grid(row=0, column=2, padx=4, pady=6, sticky="w")
-        ttk.Entry(target_frame, textvariable=self.board_var, width=20).grid(
-            row=0, column=3, padx=4, pady=6, sticky="ew"
+        root.title("AudioTransfer Studio · 旋律工坊")
+        root.geometry("1180x820")
+        root.minsize(1080, 790)
+        root.configure(bg=BG)
+        self.messages = queue.Queue()
+        self.source = self.result = None
+        self.output = output or ROOT / "out_desktop"
+        self.busy = self.completed = False
+        self.operation = ""
+        self.stage = -1
+        self.stage_percent = None
+        self.started_at = 0.0
+        self.ticks = 0
+        self.preview = WavePreview()
+        self.title = tk.StringVar()
+        self.artist = tk.StringVar()
+        self.controller = tk.StringVar(value="ssd1306")
+        self.mode = tk.StringVar(value="song")
+        self.status = tk.StringVar(value="准备好，把喜欢的歌放进来。")
+        self.detail = tk.StringVar(value="完整歌曲 → 主旋律 → 开发板播放")
+        self.counter = tk.StringVar(value="等待导入")
+        self.track_info = tk.StringVar(
+            value="MP3 / FLAC / WAV / M4A / AAC / OGG / OPUS / WMA"
         )
-        ttk.Label(target_frame, text="STM32 pin").grid(row=0, column=4, padx=4, pady=6, sticky="w")
-        ttk.Entry(target_frame, textvariable=self.stm32_pin_var, width=12).grid(
-            row=0, column=5, padx=4, pady=6, sticky="ew"
-        )
-        ttk.Label(target_frame, text="pio").grid(row=1, column=0, padx=4, pady=6, sticky="w")
-        ttk.Entry(target_frame, textvariable=self.pio_var).grid(
-            row=1, column=1, columnspan=3, padx=4, pady=6, sticky="ew"
-        )
-        ttk.Checkbutton(
-            target_frame,
-            text="立即 ST-Link 上传",
-            variable=self.upload_var,
-        ).grid(row=1, column=4, columnspan=2, padx=4, pady=6, sticky="w")
-        ttk.Label(target_frame, text="upload protocol").grid(row=2, column=0, padx=4, pady=6, sticky="w")
-        ttk.Entry(target_frame, textvariable=self.upload_protocol_var).grid(
-            row=2, column=1, columnspan=2, padx=4, pady=6, sticky="ew"
-        )
-        ttk.Label(target_frame, text="分析模式").grid(row=2, column=3, padx=4, pady=6, sticky="w")
-        ttk.Combobox(
-            target_frame,
-            textvariable=self.pitch_mode_var,
-            values=("完整歌曲（人声＋乐器）", "主旋律跟踪", "逐帧旧算法"),
-            state="readonly",
-            width=16,
-        ).grid(row=2, column=4, columnspan=2, padx=4, pady=6, sticky="ew")
-        ttk.Label(target_frame, text="候选数").grid(row=3, column=0, padx=4, pady=6, sticky="w")
-        ttk.Entry(target_frame, textvariable=self.candidate_count_var, width=12).grid(
-            row=3, column=1, padx=4, pady=6, sticky="ew"
-        )
-        ttk.Label(target_frame, text="主旋律最低 Hz").grid(row=3, column=2, padx=4, pady=6, sticky="w")
-        ttk.Entry(target_frame, textvariable=self.tracking_min_frequency_var, width=12).grid(
-            row=3, column=3, padx=4, pady=6, sticky="ew"
-        )
-        ttk.Combobox(target_frame, textvariable=self.sound_mode_var,
-                     values=("柔和发声", "丰满音色", "音符PWM", "原有方波"), state="readonly", width=16).grid(
-                         row=3, column=4, padx=4, pady=6, sticky="ew")
-        ttk.Checkbutton(target_frame, text="整理旋律节奏", variable=self.arrange_var).grid(
-            row=3, column=5, padx=4, pady=6, sticky="w")
-        ttk.Checkbutton(target_frame, text="低电平驱动模块（HIGH关闭）", variable=self.active_low_var).grid(
-            row=4, column=0, columnspan=4, padx=4, pady=4, sticky="w")
+        self.preview_time = tk.StringVar(value="00:00 / 00:00")
+        self.badge = tk.StringVar(value="●  待导入")
+        self._build()
+        for var in (self.title, self.artist, self.controller, self.mode):
+            var.trace_add("write", self._invalidate)
+        self._enable_drop()
+        root.bind("<Control-o>", lambda _: self.choose())
+        root.protocol("WM_DELETE_WINDOW", self.close)
+        root.after(60, self._poll)
+        root.after(33, self._animate)
 
-        parameter_frame = ttk.LabelFrame(root, text="参数")
-        parameter_frame.grid(row=5, column=0, columnspan=3, padx=8, pady=8, sticky="ew")
-        for column in range(8):
-            parameter_frame.columnconfigure(column, weight=1)
-        fields = [
-            ("Arduino 引脚", self.pin_var),
-            ("采样率", self.sample_rate_var),
-            ("帧 ms", self.frame_ms_var),
-            ("跳步 ms", self.hop_ms_var),
-            ("速度", self.speed_var),
-            ("最短事件 ms", self.min_note_ms_var),
-            ("事件上限 0=全曲", self.max_notes_var),
-            ("音内停顿 ms", self.gap_ms_var),
-        ]
-        for column, (label, variable) in enumerate(fields):
-            ttk.Label(parameter_frame, text=label).grid(row=0, column=column, padx=4, pady=(6, 2))
-            ttk.Entry(parameter_frame, textvariable=variable, width=12).grid(
-                row=1, column=column, padx=4, pady=(2, 6)
+    def label(self, parent, text="", size=11, color=INK, **kw):
+        return tk.Label(
+            parent, text=text, bg=parent["bg"], fg=color, font=(FONT, size), **kw
+        )
+
+    def button(self, parent, text, command, primary=False, **kw):
+        return tk.Button(
+            parent,
+            text=text,
+            command=command,
+            bg=BLUE if primary else "#22314e",
+            fg=INK,
+            activebackground="#6b99ff" if primary else "#304567",
+            activeforeground=INK,
+            disabledforeground="#74829b",
+            font=(FONT, 11, "bold"),
+            relief="flat",
+            bd=0,
+            padx=18,
+            pady=12,
+            cursor="hand2",
+            highlightthickness=0,
+            **kw,
+        )
+
+    def _build(self):
+        style = ttk.Style(self.root)
+        style.theme_use("clam")
+        style.configure(
+            "Studio.TCombobox",
+            fieldbackground="#1b2942",
+            background=EDGE,
+            foreground=INK,
+            arrowcolor=CYAN,
+            bordercolor=EDGE,
+            padding=7,
+        )
+        self.root.option_add("*TCombobox*Listbox.background", CARD)
+        self.root.option_add("*TCombobox*Listbox.foreground", INK)
+        side = tk.Frame(self.root, bg="#10182a", width=210)
+        side.pack(side="left", fill="y")
+        side.pack_propagate(False)
+        for text, size, color, pady in [
+            ("◈", 38, CYAN, (26, 0)),
+            ("AudioTransfer", 17, INK, 0),
+            ("S T U D I O   /   0.3", 9, MUTED, (6, 32)),
+            ("♫   旋律工坊", 12, CYAN, 0),
+            ("从一首歌，到一个小舞台", 9, MUTED, (10, 32)),
+        ]:
+            self.label(side, text, size, color).pack(anchor="w", padx=26, pady=pady)
+        tk.Frame(side, bg=EDGE, height=1).pack(fill="x", padx=24)
+        self.label(side, "你的开发板", 10, MUTED).pack(
+            anchor="w", padx=27, pady=(24, 10)
+        )
+        self.label(side, "STM32F103C8T6", 11).pack(anchor="w", padx=27)
+        self.label(side, "MH-FMD · 无源蜂鸣器", 9, MUTED).pack(
+            anchor="w", padx=27, pady=(6, 20)
+        )
+        for name, pin in [
+            ("蜂鸣器", "PA8"),
+            ("屏幕 SCL / SDA", "PB6 / PB7"),
+            ("音量 ＋ / －", "PA0 / PA1"),
+            ("播放 / 暂停", "PA2"),
+        ]:
+            self.label(side, name, 9, MUTED).pack(anchor="w", padx=27, pady=(8, 0))
+            self.label(side, pin, 11).pack(anchor="w", padx=27, pady=(2, 0))
+        bottom = tk.Frame(side, bg=side["bg"])
+        bottom.pack(side="bottom", fill="x", padx=26, pady=26)
+        for text, color in [
+            ("按键另一端接 GND", CYAN),
+            ("ST-Link · USB 烧录", MUTED),
+            ("开机音量 50%", MUTED),
+        ]:
+            self.label(bottom, text, 9, color).pack(anchor="w", pady=(6, 0))
+        body = tk.Frame(self.root, bg=BG)
+        body.pack(side="left", fill="both", expand=True, padx=32, pady=25)
+        header = tk.Frame(body, bg=BG)
+        header.pack(fill="x")
+        self.label(header, "让旋律，落在指尖。", 23).pack(side="left")
+        self.label(header, textvariable=self.badge, size=10, color=CYAN).pack(
+            side="right", pady=8
+        )
+        self.label(
+            body, "拖入音频，一键转换，再把整首旋律带到开发板。", 10, MUTED
+        ).pack(anchor="w", pady=(6, 19))
+        self.drop = tk.Canvas(
+            body,
+            height=156,
+            bg=CARD,
+            highlightthickness=1,
+            highlightbackground=EDGE,
+            cursor="hand2",
+        )
+        self.drop.pack(fill="x")
+        self.drop.bind("<Button-1>", lambda _: self.choose())
+        self.label(
+            body, textvariable=self.track_info, size=9, color=MUTED, anchor="w"
+        ).pack(fill="x", pady=(8, 12))
+        meta = tk.Frame(body, bg=BG)
+        meta.pack(fill="x")
+        self.entries = []
+        for i, (name, var) in enumerate(
+            [("屏幕歌名", self.title), ("歌手 / 作者", self.artist)]
+        ):
+            field = tk.Frame(meta, bg=BG)
+            field.pack(
+                side="left", fill="x", expand=True, padx=(0, 16 if i == 0 else 0)
             )
-
-        self.start_button = ttk.Button(root, text="开始处理", command=self._start)
-        self.start_button.grid(row=6, column=0, padx=8, pady=8, sticky="w")
-        ttk.Label(root, textvariable=self.status_var).grid(row=6, column=1, padx=8, pady=8, sticky="w")
-        self.preview_button = ttk.Button(root, text="试听旋律", command=self._play_preview, state="disabled")
-        self.preview_button.grid(row=6, column=2, padx=8, pady=8)
-
-        ttk.Label(root, text="日志").grid(row=7, column=0, columnspan=3, padx=8, pady=(8, 2), sticky="w")
-        self.log_text = tk.Text(root, height=12, state="disabled", wrap="word")
-        self.log_text.grid(row=8, column=0, columnspan=3, rowspan=3, padx=8, pady=(2, 8), sticky="nsew")
-        scrollbar = ttk.Scrollbar(root, orient="vertical", command=self.log_text.yview)
-        scrollbar.grid(row=8, column=3, rowspan=3, pady=(2, 8), sticky="ns")
-        self.log_text.configure(yscrollcommand=scrollbar.set)
-
-    def _choose_input(self) -> None:
-        selected = filedialog.askopenfilename(
-            title="选择音频文件",
-            filetypes=[("音频文件", "*.mp3 *.wav *.m4a *.flac *.ogg"), ("所有文件", "*.*")],
+            self.label(field, name, 9, MUTED).pack(anchor="w", pady=(0, 6))
+            entry = tk.Entry(
+                field,
+                textvariable=var,
+                font=(FONT, 12),
+                bg="#19253e",
+                fg=INK,
+                insertbackground=CYAN,
+                readonlybackground="#19253e",
+                relief="flat",
+                highlightthickness=1,
+                highlightbackground=EDGE,
+                highlightcolor=CYAN,
+                bd=10,
+            )
+            entry.pack(fill="x")
+            self.entries.append(entry)
+        actions = tk.Frame(body, bg=BG)
+        actions.pack(fill="x", pady=(18, 17))
+        self.convert_button = self.button(
+            actions, "01   一键转换", self.start_convert, True
         )
-        if selected:
-            self.input_var.set(selected)
+        self.convert_button.pack(side="left")
+        self.flash_button = self.button(
+            actions, "02   一键烧录", self.start_flash, state="disabled"
+        )
+        self.flash_button.pack(side="left", padx=12)
+        self.settings_button = self.button(actions, "设置", self.settings)
+        self.settings_button.pack(side="right")
+        progress = tk.Frame(
+            body, bg=CARD, highlightthickness=1, highlightbackground=EDGE
+        )
+        progress.pack(fill="x")
+        row = tk.Frame(progress, bg=CARD)
+        row.pack(fill="x", padx=18, pady=(14, 0))
+        self.label(row, textvariable=self.status, size=12).pack(side="left")
+        self.label(row, textvariable=self.counter, size=9, color=CYAN).pack(
+            side="right"
+        )
+        self.bar = tk.Canvas(progress, bg=CARD, height=46, highlightthickness=0)
+        self.bar.pack(fill="x", padx=18)
+        row = tk.Frame(progress, bg=CARD)
+        row.pack(fill="x", padx=18)
+        self.stage_labels = []
+        for text in STAGES:
+            label = self.label(row, text, 9, MUTED)
+            label.pack(side="left", expand=True)
+            self.stage_labels.append(label)
+        self.label(
+            progress,
+            textvariable=self.detail,
+            size=9,
+            color=MUTED,
+            anchor="w",
+            wraplength=780,
+        ).pack(fill="x", padx=18, pady=(10, 14))
+        listen = tk.Frame(body, bg=BG)
+        listen.pack(fill="x", pady=(17, 12))
+        self.play_button = self.button(
+            listen, "▶  试听旋律", self.play, state="disabled"
+        )
+        self.play_button.pack(side="left")
+        self.pause_button = self.button(
+            listen, "Ⅱ  暂停试听", self.pause, state="disabled"
+        )
+        self.pause_button.pack(side="left", padx=10)
+        self.label(listen, textvariable=self.preview_time, size=11, color=CYAN).pack(
+            side="left", padx=6
+        )
+        self.folder_button = self.button(
+            listen, "打开结果", self.open_result, state="disabled"
+        )
+        self.folder_button.pack(side="right")
+        foot = tk.Frame(body, bg=BG)
+        foot.pack(fill="x")
+        self.label(foot, "处理记录", 9, MUTED).pack(side="left")
+        self.label(foot, "分析在本机进行 · 首次使用会下载模型", 9, MUTED).pack(
+            side="right"
+        )
+        self.log = tk.Text(
+            body,
+            height=3,
+            font=("Consolas", 9),
+            bg="#0e1729",
+            fg=MUTED,
+            state="disabled",
+            relief="flat",
+            padx=12,
+            pady=8,
+            wrap="word",
+        )
+        self.log.pack(fill="both", expand=True, pady=(6, 0))
 
-    def _choose_output(self) -> None:
-        selected = filedialog.askdirectory(title="选择输出目录")
-        if selected:
-            self.output_var.set(selected)
+    def _enable_drop(self):
+        try:
+            from tkinterdnd2 import DND_FILES
 
-    def _append_log(self, message: str) -> None:
-        if self.log_text is None:
+            for widget in (self.root, self.drop):
+                widget.drop_target_register(DND_FILES)
+                widget.dnd_bind("<<Drop>>", self._drop)
+        except (ImportError, tk.TclError, AttributeError):
+            self._log("拖放组件未加载，可点击导入；运行 setup.bat 安装完整桌面依赖。")
+
+    def _drop(self, event):
+        if self.busy:
+            return "refuse_drop"
+        try:
+            files = self.root.tk.splitlist(event.data)
+            if len(files) != 1:
+                raise ValueError("请一次拖入一首歌。")
+            self.select(Path(files[0]))
+            return "copy"
+        except (ValueError, tk.TclError) as exc:
+            messagebox.showerror("导入失败", str(exc), parent=self.root)
+            return "refuse_drop"
+
+    def choose(self):
+        if self.busy:
             return
-        self.log_text.configure(state="normal")
-        self.log_text.insert("end", message.rstrip() + "\n")
-        self.log_text.see("end")
-        self.log_text.configure(state="disabled")
-
-    def _selected_target(self) -> str:
-        return "platformio-stm32" if self.target_var.get() == "STM32 PlatformIO" else "arduino"
-
-    def _play_preview(self) -> None:
-        if self.preview_path is not None and self.preview_path.is_file():
+        path = filedialog.askopenfilename(
+            parent=self.root,
+            title="选择一首完整歌曲",
+            filetypes=[
+                ("音频", "*.mp3 *.flac *.wav *.m4a *.aac *.ogg *.opus *.wma"),
+                ("全部文件", "*.*"),
+            ],
+        )
+        if path:
             try:
-                os.startfile(str(self.preview_path.resolve()))
-            except OSError as exc:
-                messagebox.showerror("试听失败", str(exc))
+                self.select(Path(path))
+            except ValueError as exc:
+                messagebox.showerror("导入失败", str(exc), parent=self.root)
 
-    def _selected_pitch_mode(self) -> str:
-        return {"逐帧旧算法": "legacy", "主旋律跟踪": "tracked"}.get(self.pitch_mode_var.get(), "song")
-
-    def _start(self) -> None:
-        if not self.input_var.get().strip():
-            messagebox.showwarning("缺少输入", "请选择输入音频文件。")
+    def select(self, path):
+        if self.busy:
             return
-        target = self._selected_target()
-        pitch_mode = self._selected_pitch_mode()
-        board = self.board_var.get().strip()
-        stm32_pin = self.stm32_pin_var.get().strip()
-        pio = self.pio_var.get().strip() or "pio"
-        try:
-            values = {
-                "pin": int(self.pin_var.get()),
-                "sample_rate": int(self.sample_rate_var.get()),
-                "frame_ms": int(self.frame_ms_var.get()),
-                "hop_ms": int(self.hop_ms_var.get()),
-                "speed": float(self.speed_var.get()),
-                "candidate_count": int(self.candidate_count_var.get()),
-                "tracking_min_frequency_hz": float(self.tracking_min_frequency_var.get()),
-                "min_note_ms": int(self.min_note_ms_var.get()),
-                "max_notes": int(self.max_notes_var.get()),
-                "gap_ms": int(self.gap_ms_var.get()),
-            }
-            if values["pin"] < 0 or values["pin"] > 255:
-                raise ValueError("引脚必须在 0 到 255 之间")
-            if values["min_note_ms"] < 0:
-                raise ValueError("最短事件不能为负数")
-            if not math.isfinite(values["speed"]) or values["speed"] <= 0:
-                raise ValueError("速度必须为正数")
-            if values["candidate_count"] <= 0:
-                raise ValueError("候选数必须为正数")
-            if not math.isfinite(values["tracking_min_frequency_hz"]) or values["tracking_min_frequency_hz"] <= 0:
-                raise ValueError("主旋律最低频率必须为正数")
-            if values["max_notes"] < 0:
-                raise ValueError("事件上限不能为负数，0 表示全曲")
-            if values["gap_ms"] < 0:
-                raise ValueError("音符间隔不能为负数")
-            validate_board(board)
-            validate_stm32_pin(stm32_pin)
-            validate_upload_protocol(self.upload_protocol_var.get())
-            config = AnalysisConfig(
-                sample_rate=values["sample_rate"],
-                frame_ms=values["frame_ms"],
-                hop_ms=values["hop_ms"],
-                pitch_mode=pitch_mode,
-                candidate_count=values["candidate_count"],
-                tracking_min_frequency_hz=values["tracking_min_frequency_hz"],
-            )
-            config.validate()
-        except (TypeError, ValueError) as exc:
-            messagebox.showerror("参数错误", str(exc))
-            return
-
-        assert self.start_button is not None
-        self.start_button.configure(state="disabled")
-        if getattr(self, "preview_button", None) is not None:
-            self.preview_button.configure(state="disabled")
-        self.status_var.set("处理中…")
-        input_path = self.input_var.get().strip()
-        output_dir = self.output_var.get().strip()
-        if not output_dir:
-            self.start_button.configure(state="normal")
-            self.status_var.set("就绪")
-            messagebox.showerror("缺少输出目录", "请选择输出目录。")
-            return
-        ffmpeg = self.ffmpeg_var.get().strip() or "ffmpeg"
-        upload = bool(self.upload_var.get())
-        upload_protocol = self.upload_protocol_var.get().strip()
-        self._append_log(f"输入: {input_path}")
-        self._append_log(f"目标: {target}")
-        self._append_log("后台线程已启动。")
-        thread = threading.Thread(
-            target=self._worker,
-            args=(
-                input_path,
-                output_dir,
-                ffmpeg,
-                config,
-                values["min_note_ms"],
-                values["max_notes"],
-                values["speed"],
-                values["pin"],
-                values["gap_ms"],
-                target,
-                board,
-                stm32_pin,
-                pio,
-                upload_protocol,
-                upload,
-                {"原有方波":"classic", "丰满音色":"harmonic", "音符PWM":"pulse"}.get(
-                    self.sound_mode_var.get() if getattr(self, "sound_mode_var", None) else "", "auto"),
-                "raw" if getattr(self, "arrange_var", None) and not self.arrange_var.get() else "score",
-                bool(getattr(self, "active_low_var", None) and self.active_low_var.get()),
-            ),
-            daemon=True,
+        path = validate_audio(path)
+        self._stop_preview()
+        self.source = path
+        title, artist = audio_labels(path)
+        self.title.set(title)
+        self.artist.set(artist)
+        self._invalidate()
+        self.status.set("歌曲已就位，开始转换吧。")
+        self.badge.set("●  已导入")
+        self.track_info.set(
+            f"{path.suffix[1:].upper()}   ·   {path.stat().st_size/1048576:.1f} MB   ·   {path.name}"
         )
-        thread.start()
+        self._log(f"已导入：{path.name}")
 
-    def _worker(
-        self,
-        input_path: str,
-        output_dir: str,
-        ffmpeg: str,
-        config: AnalysisConfig,
-        min_note_ms: int,
-        max_notes: int,
-        speed: float,
-        pin: int,
-        gap_ms: int,
-        target: str,
-        board: str,
-        stm32_pin: str,
-        pio: str,
-        upload_protocol: str,
-        upload: bool,
-        sound_mode: str = "auto",
-        arrangement: str = "score",
-        active_low: bool = False,
-    ) -> None:
+    def _invalidate(self, *_):
+        if self.busy:
+            return
+        self.result = None
+        self.completed = False
+        self.stage = -1
+        self._stop_preview()
+        for b in (
+            self.flash_button,
+            self.play_button,
+            self.pause_button,
+            self.folder_button,
+        ):
+            b.configure(state="disabled")
+        self.badge.set("●  待转换" if self.source else "●  待导入")
+        self.counter.set("等待转换" if self.source else "等待导入")
+        self.preview_time.set("00:00 / 00:00")
+        self.detail.set("完整歌曲 → 主旋律 → 开发板播放")
+        if self.source:
+            self.status.set("设置已更新，请重新转换。")
+
+    def _set_busy(self, value):
+        self.busy = value
+        for b in (self.convert_button, self.settings_button):
+            b.configure(state="disabled" if value else "normal")
+        for e in self.entries:
+            e.configure(state="readonly" if value else "normal")
+        for b in (self.flash_button, self.play_button, self.folder_button):
+            b.configure(state="normal" if self.result and not value else "disabled")
+
+    def start_convert(self):
+        if self.busy:
+            return
+        if not self.source:
+            self.choose()
+            if not self.source:
+                return
+        if not self.title.get().strip():
+            messagebox.showerror("缺少歌名", "请填写要显示的歌名。", parent=self.root)
+            return
+        request = ConversionRequest(
+            self.source,
+            self.output,
+            self.title.get(),
+            self.artist.get(),
+            self.controller.get(),
+            self.mode.get(),
+        )
+        self.result = None
+        self._begin("convert")
+        self._launch(lambda: convert(request, self._report), "converted")
+
+    def start_flash(self):
+        if self.busy or self.result is None:
+            return
         try:
-            paths = process_file(
-                input_path,
-                output_dir,
-                config=config,
-                min_note_ms=min_note_ms,
-                max_notes=max_notes or None,
-                speed=speed,
-                pin=pin,
-                gap_ms=gap_ms,
-                ffmpeg=ffmpeg,
-                target=target,
-                board=board,
-                stm32_pin=stm32_pin,
-                upload_protocol=upload_protocol,
-                progress=lambda message: self.messages.put(("progress", message)),
-                sound_mode=sound_mode,
-                arrangement=arrangement,
-                active_low=active_low,
-            )
-            self.messages.put(("generated", paths))
-            if upload and target == "platformio-stm32":
-                result = upload_platformio(output_dir, pio_command=pio)
-                self.messages.put(("upload", result))
-            elif upload:
-                self.messages.put(("upload-skipped", None))
-            self.messages.put(("success", None))
-        except Exception as exc:  # surface errors in the UI instead of killing the worker silently
-            self.messages.put(("error", exc))
+            self.result.validate_for_flash()
+        except (OSError, ValueError) as exc:
+            self._invalidate()
+            messagebox.showerror("请重新转换", str(exc), parent=self.root)
+            return
+        result = self.result
+        self._begin("flash")
+        self._launch(lambda: flash(result, self._report), "flashed")
 
-    def _log_paths(self, paths: object) -> None:
-        self.preview_path = paths.preview_path
-        if self.preview_button is not None and self.preview_path is not None and self.preview_path.is_file():
-            self.preview_button.configure(state="normal")
-        self._append_log(f"JSON: {paths.json_path}")
-        self._append_log(f"CSV:  {paths.csv_path}")
-        self._append_log(f"INO:  {paths.ino_path}")
-        self._append_log(f"试听: {paths.preview_path}")
-        self._append_log(f"MIDI: {paths.midi_path}")
-        self._append_log(f"简谱音符表: {paths.score_path}")
-        if paths.platformio_ini_path is not None:
-            self._append_log(f"PlatformIO 工程: {paths.platformio_ini_path.parent}")
-            self._append_log(f"platformio.ini: {paths.platformio_ini_path}")
-        if paths.main_cpp_path is not None:
-            self._append_log(f"STM32 main.cpp: {paths.main_cpp_path}")
+    def _begin(self, operation):
+        self._stop_preview()
+        self.operation = operation
+        self.stage = 0
+        self.stage_percent = None
+        self.completed = False
+        self.started_at = time.monotonic()
+        self._set_busy(True)
+        self.pause_button.configure(state="disabled")
+        self.badge.set("●  转换中" if operation == "convert" else "●  烧录中")
+        names = (
+            STAGES
+            if operation == "convert"
+            else ("准备工程", "编译程序", "生成固件", "写入开发板", "校验固件")
+        )
+        for w, n in zip(self.stage_labels, names):
+            w.configure(text=n)
+        self.status.set("开始转换" if operation == "convert" else "开始烧录")
+        self.detail.set("正在准备，请稍候。")
+        self._log("— 开始转换 —" if operation == "convert" else "— 开始烧录 —")
 
-    def _poll_messages(self) -> None:
+    def _launch(self, job, success):
+        def worker():
+            try:
+                self.messages.put((success, job()))
+            except Exception as exc:
+                self.messages.put(("error", str(exc)))
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _report(self, progress):
+        self.messages.put(("progress", progress))
+
+    def _log(self, text):
+        self.log.configure(state="normal")
+        self.log.insert("end", text.rstrip() + "\n")
+        if int(self.log.index("end-1c").split(".")[0]) > 800:
+            self.log.delete("1.0", "200.0")
+        self.log.see("end")
+        self.log.configure(state="disabled")
+
+    def _poll(self):
         try:
             while True:
                 kind, payload = self.messages.get_nowait()
                 if kind == "progress":
-                    self.status_var.set(str(payload))
-                    self._append_log(str(payload))
-                elif kind == "generated":
-                    self._log_paths(payload)
-                    self.status_var.set("生成完成，准备上传" if self.upload_var.get() else "生成完成")
-                elif kind == "upload":
-                    self.status_var.set("ST-Link 上传完成")
-                    self._append_log("PlatformIO 上传成功。")
-                    self._append_log(" ".join(payload.command))
-                    if payload.output:
-                        self._append_log(payload.output)
-                elif kind == "upload-skipped":
-                    self._append_log("未执行 PlatformIO 上传：当前目标为 Arduino。")
-                elif kind == "success":
-                    self.status_var.set("完成")
-                else:
-                    self.status_var.set("失败")
-                    self._append_log(f"错误: {payload}")
-                    messagebox.showerror("处理失败", str(payload))
-                if self.start_button is not None and kind in ("success", "error"):
-                    self.start_button.configure(state="normal")
+                    self.stage = max(self.stage, payload.stage)
+                    self.stage_percent = payload.percent
+                    if payload.message:
+                        self.detail.set(payload.message[:100])
+                        self._log(payload.message)
+                    self.status.set(self.stage_labels[self.stage]["text"])
+                elif kind in ("converted", "flashed"):
+                    if kind == "converted":
+                        self.result = payload
+                        self.preview_time.set(
+                            f"00:00 / {duration(payload.duration_ms)}"
+                        )
+                        self.detail.set(
+                            f"{payload.event_count} 个音符事件 · 全长 {duration(payload.duration_ms)} · 可先试听，再一键烧录"
+                        )
+                    else:
+                        self.detail.set(
+                            "已写入并完成校验，开发板开始播放；PA2 按键可暂停 / 继续。"
+                        )
+                    self.stage = 4
+                    self.stage_percent = 100
+                    self.completed = True
+                    self._set_busy(False)
+                    self.status.set("转换完成" if kind == "converted" else "烧录成功")
+                    self.badge.set("●  可烧录" if kind == "converted" else "●  已烧录")
+                    self.counter.set("100%  ·  完成")
+                    self._log(self.detail.get())
+                elif kind == "error":
+                    self._set_busy(False)
+                    self.completed = False
+                    self.status.set("处理未完成")
+                    self.badge.set("●  需要处理")
+                    self.counter.set("未完成")
+                    self.detail.set("可在下方记录查看原因，修正后重试。")
+                    self._log(payload)
+                    messagebox.showerror("处理未完成", payload[:600], parent=self.root)
         except queue.Empty:
             pass
-        self.root.after(100, self._poll_messages)
+        self.root.after(60, self._poll)
+
+    def _animate(self):
+        self.ticks += 1
+        w = max(100, self.drop.winfo_width())
+        self.drop.delete("all")
+        self.drop.create_rectangle(10, 10, w - 11, 145, outline=EDGE, dash=(5, 5))
+        self.drop.create_text(35, 36, anchor="w", text="♫", fill=CYAN, font=(FONT, 26))
+        self.drop.create_text(
+            85,
+            40,
+            anchor="w",
+            text=self.source.stem[:38] if self.source else "拖入一首歌，开始创作",
+            fill=INK,
+            font=(FONT, 16, "bold"),
+        )
+        self.drop.create_text(
+            35,
+            88,
+            anchor="w",
+            text="点击这里选择文件   /   支持中文、空格和长文件名",
+            fill=MUTED,
+            font=(FONT, 10),
+        )
+        for i in range(64):
+            h = 3 + abs(math.sin(i * 0.51 + self.ticks * 0.045)) * (
+                5 + 10 * abs(math.sin(i * 0.2))
+            )
+            x = 35 + i * (w - 70) / 64
+            self.drop.create_line(
+                x, 126 - h / 2, x, 126 + h / 2, fill=CYAN if i < 28 else BLUE, width=3
+            )
+        w = max(100, self.bar.winfo_width())
+        self.bar.delete("all")
+        seg = (w - 24) / 5
+        for i in range(5):
+            x = i * (seg + 6)
+            done = self.completed or i < self.stage
+            self.bar.create_rectangle(
+                x,
+                18,
+                x + seg,
+                26,
+                fill=CYAN if done else BLUE if self.busy and i == self.stage else EDGE,
+                outline="",
+            )
+            self.stage_labels[i].configure(
+                fg=CYAN if done else INK if i == self.stage else MUTED
+            )
+            if self.busy and i == self.stage:
+                if self.stage_percent is not None:
+                    self.bar.create_rectangle(
+                        x,
+                        18,
+                        x + seg * self.stage_percent / 100,
+                        26,
+                        fill=CYAN,
+                        outline="",
+                    )
+                else:
+                    glow = x + (self.ticks % 80) / 80 * max(0, seg - 24)
+                    self.bar.create_rectangle(
+                        glow, 16, glow + 24, 28, fill="#9cf8ee", outline=""
+                    )
+        if self.busy:
+            s = int(time.monotonic() - self.started_at)
+            p = (
+                f" · 本阶段 {self.stage_percent}%"
+                if self.stage_percent is not None
+                else ""
+            )
+            self.counter.set(f"{self.stage+1} / 5{p}  ·  {s//60:02d}:{s%60:02d}")
+        if self.preview.opened and self.result and self.ticks % 15 == 0:
+            try:
+                pos = self.preview.position()
+                self.preview_time.set(
+                    f"{duration(pos)} / {duration(self.result.duration_ms)}"
+                )
+                if pos >= self.result.duration_ms - 30 and not self.preview.paused:
+                    self._stop_preview()
+            except Exception as exc:
+                self._log(str(exc))
+                self._stop_preview()
+        self.root.after(33, self._animate)
+
+    def _stop_preview(self):
+        try:
+            self.preview.close()
+        except Exception as exc:
+            self._log(str(exc))
+        self.pause_button.configure(text="Ⅱ  暂停试听", state="disabled")
+
+    def play(self):
+        if self.busy or not self.result:
+            return
+        try:
+            self.preview.play(self.result.preview)
+            self.pause_button.configure(state="normal", text="Ⅱ  暂停试听")
+        except Exception as exc:
+            messagebox.showerror("无法试听", str(exc), parent=self.root)
+
+    def pause(self):
+        try:
+            self.preview.toggle()
+            self.pause_button.configure(
+                text="▶  继续试听" if self.preview.paused else "Ⅱ  暂停试听"
+            )
+        except Exception as exc:
+            messagebox.showerror("试听失败", str(exc), parent=self.root)
+
+    def open_result(self):
+        if self.result:
+            os.startfile(str(self.result.project.resolve()))
+
+    def settings(self):
+        if self.busy:
+            return
+        dialog = tk.Toplevel(self.root)
+        dialog.title("播放设置")
+        dialog.geometry("540x360")
+        dialog.configure(bg=CARD)
+        dialog.transient(self.root)
+        dialog.grab_set()
+        self.label(dialog, "播放设置", 18).pack(anchor="w", padx=24, pady=(22, 14))
+        for label, var, values in [
+            ("屏幕驱动", self.controller, ("ssd1306", "sh1106")),
+            (
+                "分析模式：song 完整歌曲 / tracked 单旋律",
+                self.mode,
+                ("song", "tracked"),
+            ),
+        ]:
+            self.label(dialog, label, 10, MUTED).pack(anchor="w", padx=24, pady=(6, 4))
+            ttk.Combobox(
+                dialog,
+                textvariable=var,
+                values=values,
+                state="readonly",
+                style="Studio.TCombobox",
+            ).pack(fill="x", padx=24)
+        folder = tk.StringVar(value=str(self.output))
+        self.label(
+            dialog, textvariable=folder, size=9, color=MUTED, wraplength=480
+        ).pack(anchor="w", padx=24, pady=12)
+        row = tk.Frame(dialog, bg=CARD)
+        row.pack(fill="x", padx=24)
+
+        def choose_output():
+            selected = filedialog.askdirectory(parent=dialog, title="选择转换结果目录")
+            if selected:
+                self.output = Path(selected)
+                folder.set(selected)
+
+        self.button(row, "更换输出目录", choose_output).pack(side="left")
+        self.button(row, "完成", dialog.destroy, True).pack(side="right")
+
+    def close(self):
+        if self.busy:
+            messagebox.showinfo(
+                "正在处理", "请等待本次转换或烧录结束后关闭窗口。", parent=self.root
+            )
+            return
+        self._stop_preview()
+        self.root.destroy()
 
 
+def main():
+    parser = argparse.ArgumentParser(description="AudioTransfer Studio 桌面程序")
+    parser.add_argument("--file", type=Path)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--advanced", action="store_true", help="打开原有 Arduino / STM32 参数界面"
+    )
+    args = parser.parse_args()
+    if args.advanced:
+        from .legacy_gui import AudioTransferApp
 
-def main() -> None:
-    root = tk.Tk()
-    AudioTransferApp(root)
+        root = tk.Tk()
+        AudioTransferApp(root)
+    else:
+        try:
+            from tkinterdnd2 import TkinterDnD
+
+            root = TkinterDnD.Tk()
+        except (ImportError, tk.TclError):
+            root = tk.Tk()
+        app = StudioApp(root, args.output)
+        if args.file:
+            try:
+                app.select(args.file)
+            except ValueError as exc:
+                messagebox.showerror("导入失败", str(exc), parent=root)
     root.mainloop()
 
 

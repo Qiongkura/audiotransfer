@@ -38,8 +38,14 @@ def static_frame(title: str, artist: str, font_path: Path) -> tuple[list[int], o
     draw = ImageDraw.Draw(image)
     title_font = ImageFont.truetype(str(font_path), 18)
     detail_font = ImageFont.truetype(str(font_path), 12)
-    if draw.textlength(title, font=title_font) > 105 or draw.textlength(artist, font=detail_font) > 66:
-        raise ValueError('当前128×64布局的歌名或歌手过长，请使用简短显示名称')
+    def fit(value, font, width):
+        value = ' '.join(value.split())
+        if draw.textlength(value, font=font) <= width:
+            return value
+        while value and draw.textlength(value + '…', font=font) > width:
+            value = value[:-1]
+        return value + '…'
+    title, artist = fit(title, title_font, 105), fit(artist, detail_font, 66)
     draw.text((3, 0), title, font=title_font, fill=1, anchor='lt')
     draw.line((3, 20, 124, 20), fill=1)
     draw.text((3, 23), artist, font=detail_font, fill=1, anchor='lt')
@@ -57,14 +63,14 @@ def array(name: str, values: list[int]) -> str:
 
 def write_player_project(source: Path, output: Path, *, title: str = '茶汤', artist: str = '郁可唯',
                          controller: str = 'ssd1306', scl: str = 'PB6', sda: str = 'PB7',
-                         volume_up: str = 'PA0', volume_down: str = 'PA1',
+                         volume_up: str = 'PA0', volume_down: str = 'PA1', pause: str = 'PA2',
                          font_path: Path = Path(r'C:\Windows\Fonts\msyh.ttc')) -> Path:
     if source.resolve() == output.resolve():
         raise ValueError('请使用独立输出目录以保留原来的纯播放版本')
     if controller not in ('ssd1306', 'sh1106'):
         raise ValueError('屏幕驱动应为ssd1306或sh1106')
-    pins = [validate_stm32_pin(p).upper() for p in (scl, sda, volume_up, volume_down)]
-    if any(p in ('PA8', 'PA13', 'PA14') for p in pins) or len(set(pins)) != 4:
+    pins = [validate_stm32_pin(p).upper() for p in (scl, sda, volume_up, volume_down, pause)]
+    if any(p in ('PA8', 'PA13', 'PA14') for p in pins) or len(set(pins)) != 5:
         raise ValueError('屏幕与按键引脚不能重复或占用蜂鸣器PA8、调试PA13/PA14')
     if pins[:2] not in (['PB6', 'PB7'], ['PB8', 'PB9']):
         raise ValueError('本板使用I2C1：SCL/SDA请选择PB6/PB7或PB8/PB9')
@@ -93,6 +99,7 @@ def write_player_project(source: Path, output: Path, *, title: str = '茶汤', a
               f'const bool PLAYER_SH1106 = {str(controller == "sh1106").lower()};\n'
               f'const uint32_t PLAYER_SCL = {pins[0]}, PLAYER_SDA = {pins[1]};\n'
               f'const uint32_t PLAYER_VOLUME_UP = {pins[2]}, PLAYER_VOLUME_DOWN = {pins[3]};\n'
+              f'const uint32_t PLAYER_PAUSE = {pins[4]};\n'
               f'const char PLAYER_ASCII_CHARS[] = "{"".join(FONT_ROWS)}";\n'
               + array('PLAYER_ASCII', font_columns()) + array('PLAYER_BASE', base))
     (src / 'player_config.h').write_text(config, encoding='utf-8')
@@ -101,7 +108,8 @@ def write_player_project(source: Path, output: Path, *, title: str = '茶汤', a
     result.platformio_ini_path.write_text(ini + 'build_flags = -DI2C_TIMEOUT_TICK=5\n', encoding='utf-8')
     screen = {'title': title, 'artist': artist, 'width': 128, 'height': 64, 'controller': controller,
               'addresses': ['0x3C', '0x3D'], 'scl': pins[0], 'sda': pins[1],
-              'volume_up': pins[2], 'volume_down': pins[3], 'key_active_level': 'LOW',
+              'volume_up': pins[2], 'volume_down': pins[3], 'pause': pins[4], 'key_active_level': 'LOW',
+              'pause_policy': 'freeze_melody_clock_and_progress_resume_same_note', 'resume_ramp_ms': 20,
               'volume_initial_percent': 50, 'volume_step_policy': '1_below_20__5_above',
               'volume_gain_curve': 'logarithmic_60db_control_gain_not_spl', 'debounce_ms': 25,
               'hold_delay_ms': 350, 'hold_repeat_ms': 150, 'volume_ramp_ms': 20,
@@ -122,11 +130,12 @@ def main(argv=None):
     parser.add_argument('--sda', default='PB7')
     parser.add_argument('--volume-up', default='PA0')
     parser.add_argument('--volume-down', default='PA1')
+    parser.add_argument('--pause', default='PA2')
     parser.add_argument('--font', type=Path, default=Path(r'C:\Windows\Fonts\msyh.ttc'))
     args = parser.parse_args(argv)
     output = write_player_project(args.source, args.output, title=args.title, artist=args.artist,
                                   controller=args.controller, scl=args.scl, sda=args.sda,
-                                  volume_up=args.volume_up, volume_down=args.volume_down, font_path=args.font)
+                                  volume_up=args.volume_up, volume_down=args.volume_down, pause=args.pause, font_path=args.font)
     print(output)
     return 0
 

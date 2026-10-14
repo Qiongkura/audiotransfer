@@ -4,6 +4,7 @@ const uint32_t PLAYER_DURATION_MS = 308773UL;
 const bool PLAYER_SH1106 = false;
 const uint32_t PLAYER_SCL = PB6, PLAYER_SDA = PB7;
 const uint32_t PLAYER_VOLUME_UP = PA0, PLAYER_VOLUME_DOWN = PA1;
+const uint32_t PLAYER_PAUSE = PA2;
 const char PLAYER_ASCII_CHARS[] = "0123456789:/%";
 const uint8_t PLAYER_ASCII[] = {
   0x3E, 0x51, 0x49, 0x45, 0x3E, 0x00, 0x42, 0x7F, 0x40, 0x00, 0x42, 0x61, 0x51, 0x49, 0x46, 0x41,

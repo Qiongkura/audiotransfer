@@ -159,8 +159,10 @@ void playMelody(uint8_t mode) {
       configureCarrier(note.frequency_hz, mode);
     phaseStep = uint32_t((uint64_t(note.frequency_hz) << 32) / SAMPLE_RATE);
     const uint32_t initialColor2 = harmonic2Q15, initialColor3 = harmonic3Q15;
-    while (int32_t(millis() - deadline) < 0) {
-      const uint32_t elapsed = millis() - start;
+    while (int32_t(@MUSIC_NOW@ - deadline) < 0) {
+      @UI_POLL@
+      @UI_PAUSE@
+      const uint32_t elapsed = @MUSIC_NOW@ - start;
       if (note.frequency_hz && elapsed < sounding) {
         const uint32_t gain = envelopeGain(elapsed, sounding, note.velocity, continued, joinNext, initialGain);
         if (mode == 3) {
@@ -178,7 +180,6 @@ void playMelody(uint8_t mode) {
         gainQ15 = @APPLIED_GAIN@;
         if (mode == 4) *compareRegister = uint64_t(carrierTicks) * gainQ15 / 65534;
       } else silence();
-      @UI_POLL@
       delay(1);
     }
     if (!joinNext) silence();
@@ -227,7 +228,9 @@ void loop() {
         'INITIAL_GAIN': 'envelopeLevelQ15' if player_ui else 'gainQ15',
         'UI_RAW_GAIN': 'envelopeLevelQ15 = gain;' if player_ui else '',
         'APPLIED_GAIN': 'playerUi.gain(gain)' if player_ui else 'gain',
-        'UI_POLL': 'const uint32_t uiNow = millis(); const int32_t uiRemaining = (note.frequency_hz && uint32_t(uiNow - start) < sounding) ? int32_t(start + sounding - uiNow) : int32_t(deadline - uiNow); playerUi.poll(uiNow, uiRemaining > 0 ? uint32_t(uiRemaining) : 0);' if player_ui else '',
+        'MUSIC_NOW': 'playerUi.musicNow()' if player_ui else 'millis()',
+        'UI_POLL': 'const uint32_t uiMusicNow = playerUi.musicNow(); const int32_t uiRemaining = (note.frequency_hz && uint32_t(uiMusicNow - start) < sounding) ? int32_t(start + sounding - uiMusicNow) : int32_t(deadline - uiMusicNow); playerUi.poll(millis(), playerUi.paused() ? 20 : (uiRemaining > 0 ? uint32_t(uiRemaining) : 0));' if player_ui else '',
+        'UI_PAUSE': 'if (playerUi.paused()) { gainQ15 = 0; *compareRegister = 0; delay(1); continue; }\n      if (int32_t(playerUi.musicNow() - deadline) >= 0) break;' if player_ui else '',
         'UI_FINISH': 'playerUi.finish();' if player_ui else '',
         'UI_WAIT': 'playerUi.wait(100);' if player_ui else 'delay(100);',
     })
