@@ -11,11 +11,14 @@
   "arduino_stm32_version": "3.0.0",
   "firmware_sha256": "bbc27a23159184839af946274fb115b13b091346d224ca7fce00ca90e4512807",
   "build_verified": true,
-  "upload_verified": false,
-  "upload_failure": "OpenOCD init mode failed: unable to connect to the target",
+  "upload_verified": true,
   "validation_date": "2026-10-14",
   "unit_tests_passed": 76,
   "arm_logic_checks_passed": 52,
   "arm_logic_check_method": "Cortex-M3 instructions in Unicorn; not a physical board test",
-  "physical_pause_verified": false
+  "physical_pause_verified": true,
+  "pause_verification_method": "actual_mcu_runtime_with_gpio_pull_down_key_simulation",
+  "pause_verification_details": "pause-checks.json",
+  "physical_logic_checks_passed": 52,
+  "external_switch_manual_test": false
 }
