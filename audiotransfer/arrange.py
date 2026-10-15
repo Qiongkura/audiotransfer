@@ -42,6 +42,7 @@ def arrange_events(
     events: list[NoteEvent], beats: np.ndarray, *,
     onsets_ms: set[int] | None = None, transpose: int | None = None,
     analysis=None, beat_strengths: np.ndarray | None = None, phrasing: bool = False,
+    preserve_timing: bool = False,
 ) -> Arrangement:
     """Remove short, off-beat slide steps without changing clear note attacks.
 
@@ -61,7 +62,7 @@ def arrange_events(
     attacks = sorted(onsets_ms or set())
     while index < len(result):
         event = result[index]
-        if 0 < index < len(result) - 1 and len(grid):
+        if 0 < index < len(result) - 1 and len(grid) and not preserve_timing:
             left, right = result[index - 1], result[index + 1]
             protected = any(abs(attack - start) <= 40 for attack in attacks)
             if all(e.frequency_hz > 0 for e in (left, event, right)):
@@ -82,6 +83,8 @@ def arrange_events(
     boundaries = np.cumsum([0] + [e.duration_ms for e in result]).tolist()
     snapped = 0
     for i in range(1, len(boundaries) - 1):
+        if preserve_timing:
+            break
         original = boundaries[i]
         candidate = round(nearest_grid(grid, original))
         limit = 25 if result[i - 1].frequency_hz == 0 or result[i].frequency_hz == 0 else 45

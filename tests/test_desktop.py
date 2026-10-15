@@ -3,6 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
+from audiotransfer import __version__
 
 from audiotransfer.desktop import (
     ConversionRequest,
@@ -101,7 +102,7 @@ class DesktopTests(unittest.TestCase):
                 (result.project / "desktop-job.json").read_text(encoding="utf-8")
             )
             self.assertEqual(meta["requested_content_mode"], "instrumental")
-            self.assertEqual(meta["converter_version"], "0.3.2")
+            self.assertEqual(meta["converter_version"], __version__)
 
     def test_missing_or_incomplete_result_cannot_be_flashed(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -182,6 +183,8 @@ class DesktopTests(unittest.TestCase):
                 build = Path(command[command.index("-d") + 1])
                 self.assertTrue(str(build).isascii())
                 self.assertEqual(project_hashes(build), project_hashes(root))
+                self.assertEqual(kwargs["env"]["TEMP"], str(build))
+                self.assertEqual(kwargs["env"]["TMP"], str(build))
                 process = MagicMock()
                 process.__enter__.return_value = process
                 process.stdout = (
@@ -193,6 +196,10 @@ class DesktopTests(unittest.TestCase):
             with (
                 patch("audiotransfer.desktop.platformio_command", return_value=["pio"]),
                 patch("audiotransfer.desktop.subprocess.Popen", side_effect=run),
+                patch(
+                    "audiotransfer.desktop.tempfile.gettempdir",
+                    side_effect=AssertionError("烧录不能使用系统盘临时目录"),
+                ),
             ):
                 output = flash(result, lambda _: None)
             self.assertNotIn("-t", observed[0])

@@ -19,11 +19,16 @@ internal static class StudioLauncher
         }
         try
         {
+            string temporary = Path.Combine(root, ".cache", "tmp");
+            Directory.CreateDirectory(temporary);
             var start = new ProcessStartInfo(python, "-m audiotransfer.gui");
             start.WorkingDirectory = root;
             start.UseShellExecute = false;
             start.CreateNoWindow = true;
             start.EnvironmentVariables["PYTHONUTF8"] = "1";
+            start.EnvironmentVariables["TEMP"] = temporary;
+            start.EnvironmentVariables["TMP"] = temporary;
+            start.EnvironmentVariables["PIP_CACHE_DIR"] = Path.Combine(root, ".cache", "pip");
             Process.Start(start);
         }
         catch (Exception error)

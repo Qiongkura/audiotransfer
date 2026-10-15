@@ -2,6 +2,10 @@
 setlocal
 set PYTHONUTF8=1
 cd /d "%~dp0"
+set "TEMP=%CD%\.cache\tmp"
+set "TMP=%TEMP%"
+set "PIP_CACHE_DIR=%CD%\.cache\pip"
+if not exist "%TEMP%" mkdir "%TEMP%"
 if "%~1"=="" (
   echo 用法: run_cli.bat input.mp3 -o out_dir [其他参数]
   exit /b 2

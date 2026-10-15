@@ -14,13 +14,15 @@ Windows 安装 Python 3.10 或以上版本后，先双击 `setup.bat` 安装依�
 
 桌面版默认适配本项目的 STM32F103C8T6、PA8 无源模块、SSD1306 中文屏幕及三个按键，使用音符 PWM、低电平有效、开机音量 50%，保留原速和完整歌曲。设置中可改 SH1106 或切换为单旋律跟踪。默认输出在 `out_desktop/歌名-任务编号/player/`，包含试听、MIDI、简谱、音符和可重建固件的源码。长歌名在屏幕上自动省略，元数据保留全文。
 
-更换音频、歌名、歌手或播放设置后，需要重新转换才能烧录。每次转换独立保存，失败不会复用上一首；烧录前检查生成工程的完整性。烧录阶段会在英文临时目录编译，绕过 Windows ARM 工具对中文输出路径的限制，并将生成的 `firmware.bin` 和 `flash.log` 保存回结果目录。
+更换音频、歌名、歌手或播放设置后，需要重新转换才能烧录。每次转换独立保存，失败不会复用上一首；烧录前检查生成工程的完整性。烧录阶段在项目所在盘的英文临时目录编译，绕过 Windows ARM 工具对中文输出路径的限制，并将生成的 `firmware.bin` 和 `flash.log` 保存回结果目录。安装、启动时的下载缓存和临时文件也使用项目下的 `.cache/`。
 
 “有演唱”按演唱段保护主唱，换气保留休止，独立前奏、间奏和尾奏才接入乐器。“纯音乐”全曲跟踪主奏，并合回被分离到人声轨的乐器音。“自动识别”根据整首录音的人声轨证据判断，结果会显示在转换完成处；这是启发式判断，识别不符合录音内容时应手动选择。已生成的旧结果需要重新转换才会应用新规则。
 
-0.3.2 默认用 RMVPE 核对演唱基音，并用 CREPE 保留可靠唱音；音符整理按连续人声路径处理证据较弱的快速跳音。普通转换不需要提供简谱。首次人声核验会额外下载约 325 MiB 的 RMVPE 模型压缩包，验证后保存在本机 `.models/rmvpe/`，后续可离线复用。
+0.4.0 桌面版默认试用“唱音识别”：先用 RMVPE、CREPE 和分离轨能量确定演唱区域，再由 GAME 识别整个音符的音高与起止，减少把颤音、辅音和瞬时波动拆成多次蜂鸣。同音重复仍保持独立，真实快音不会仅因短于 80 ms 被删掉，演唱边界不再强制吸附到节拍网格。设置中的“连续音高（兼容）”可切回 0.3.2 的方式。两种自动方式都不需要提供简谱。
 
-原始《茶汤》按 SHA-256 指纹匹配本仓库校对曲谱，重命名不影响识别；手动选择“纯音乐”时跳过歌曲专用校谱，其他录音走自动提取。首次使用分离模型需要联网下载，之后可在本机处理。旧版 Arduino / STM32 全参数界面仍可通过 `run_gui.bat --advanced` 打开。
+首次演唱区域核验会下载约 325 MiB 的 RMVPE 压缩包，唱音识别另需约 44 MiB 的 GAME Small ONNX；都保存在项目 `.models/`，后续可离线复用。GAME 在 CPU 上分段运行，每段最长 13.2 秒，限制长歌的内存占用。GAME 权重为 CC BY-NC-SA 4.0，限非商业用途，详见[模型来源和许可](docs/GAME-NOTICE.md)。
+
+使用“连续音高（兼容）”时，原始《茶汤》按 SHA-256 指纹匹配本仓库校对曲谱，重命名不影响识别。“唱音识别”始终走自动提取，跳过此校谱快捷匹配；“纯音乐”也不使用歌曲专用校谱。首次使用分离模型需要联网下载，之后可在本机处理。旧版 Arduino / STM32 全参数界面仍可通过 `run_gui.bat --advanced` 打开。
 
 也可用 `python -m pip install -e ".[song,display,desktop]"` 安装歌曲转换、屏幕与桌面功能。安装包包括内置 FFmpeg，不必单独配置 FFmpeg PATH；填写自定义 ffmpeg 路径时仍优先使用该路径。仓库不包含原曲音频、分离音轨、模型权重或本机虚拟环境。
 
@@ -31,12 +33,15 @@ Windows 安装 Python 3.10 或以上版本后，先双击 `setup.bat` 安装依�
 ```powershell
 .\run_cli.bat ".\input\song.flac" -o out_song
 .\run_cli.bat ".\input\song.flac" -o out_song --content-mode vocal
+.\run_cli.bat ".\input\song.flac" -o out_song --content-mode vocal --song-backend game
 .\run_cli.bat ".\input\instrumental.flac" -o out_music --content-mode instrumental
 ```
 
 默认使用 STM32、全曲模式、PA8、原速 1.0、完整事件数、旋律编排和柔和发声。Arduino 用户可加 `--target arduino --pin 8`。
 
 ## 完整歌曲模式
+
+以下逐帧处理规则主要描述兼容模式。`--song-backend game` 复用演唱区域和独立乐器段识别，再用音符级唱音替换整个演唱区域；休止和同音重复保留原始边界，不执行逐帧人声量化和平滑，也不把唱音边界改到节拍网格上。片段接缝只有两侧都确认同一延音跨过接缝时才合并。
 
 1. 保留立体声输入，使用 Demucs 分离人声、乐器、贝斯和鼓点。
 2. 默认用 RMVPE 核对人声基音，并用 CREPE 保留确定的唱音。两者一致时保留弱片段的可靠证据，RMVPE 不确定时保留 CREPE 的清楚唱音；两者都缺少证据时先留休止。实际有音高且能量持续、匹配两侧可靠唱音的弱延音可以恢复，真实低能量换气保留。
@@ -151,7 +156,8 @@ STM32F103C8T6 的 Flash 有限。默认保留全曲，不会为了事件上限�
 复调间奏的旧单声部音高缓存不适合直接作对齐基准。已核对的段落可显式填写 `reviewed_alignment.offset_seconds` 和 `quarter_seconds`，仍检查相邻段落重叠与原曲边界；此入口只消费明确的歌曲校谱参数，不自动猜测谱子。间奏的频谱支持诊断表示预定三音集合内的能量支持，不能当成逐音准确率。需要生成当前模块声部时，可在 `audiotransfer.scored_song` 命令追加 `--transpose 12 --sound-mode pulse --active-low`，再通过 `audiotransfer.player` 添加屏幕；播放器仍开机默认50%。
 
 - `--song-backend pyin`：显式使用旧版 pYIN 人声音高识别与轻量乐器跟踪。
-- `--song-backend rmvpe`：默认的人声基音核验；乐器段继续使用 CREPE 与频谱候选。
+- `--song-backend game`：按整颗唱音识别起止和音高，保持实际演唱节奏；无需简谱。
+- `--song-backend rmvpe`：命令行默认的人声基音核验；乐器段继续使用 CREPE 与频谱候选。
 - `--song-backend crepe`：兼容原来的单模型音高提取，不下载额外 RMVPE 模型。
 - `--sound-mode soft` / `harmonic` / `pulse` / `classic`：柔和发声 / 衰减泛音 / 音符频率 PWM / 原方波，STM32 自动模式默认柔和。
 - `--active-low`：STM32 模块低电平导通，休止 HIGH；按实际驱动电路选择。
@@ -167,7 +173,7 @@ STM32F103C8T6 的 Flash 有限。默认保留全曲，不会为了事件上限�
 
 ## 验证
 
-本次人声基音核验及连续音符处理见 [0.3.2 验证记录](docs/validation-v0.3.2.md)。类型选择、主旋律保护和实板烧录记录见 [0.3.1 验证记录](docs/validation-v0.3.1.md)；暂停键与音量的已有实板记录见 [0.3 验证记录](docs/validation.md)。
+本次唱音边界和自动识别对比见 [0.4.0 验证记录](docs/validation-v0.4.0.md)。此前人声基音核验见 [0.3.2 验证记录](docs/validation-v0.3.2.md)。类型选择和实板烧录见 [0.3.1 验证记录](docs/validation-v0.3.1.md)；暂停键与音量记录见 [0.3 验证记录](docs/validation.md)。
 
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -v -s tests

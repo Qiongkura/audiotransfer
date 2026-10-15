@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 import subprocess
 
@@ -108,7 +108,9 @@ def events_from_samples(
 
     config = config or AnalysisConfig()
     if config.pitch_mode == "song":
-        if config.content_mode == "instrumental":
+        if config.song_backend == "game" and config.content_mode != "instrumental":
+            analysis = analyze_stems(samples, np.zeros_like(samples), config)
+        elif config.content_mode == "instrumental":
             analysis = analyze_stems(np.zeros_like(samples), samples, config)
         else:
             pitch_frames = vocal_frames(samples, config)
@@ -325,6 +327,17 @@ def _decode_vocal_note_path(
 def events_from_song(
     analysis: SongAnalysis, config: AnalysisConfig, min_note_ms: int
 ) -> list[NoteEvent]:
+    if analysis.sung_notes is not None:
+        from .singing import overlay_events
+        # The frame-based route still supplies instruments. Singing keeps the
+        # model's exact note boundaries instead of being smoothed a second time.
+        baseline = events_from_song(
+            replace(analysis, sung_notes=None, singing_regions=None), config, min_note_ms
+        )
+        return overlay_events(
+            baseline, analysis.sung_notes, analysis.singing_regions or [],
+            round(analysis.sample_count * 1000 / analysis.sample_rate),
+        )
     # Voicing has already been decided by the backend. Do not reapply its
     # anchor threshold when converting weak portions of a reliable note.
     frames = stable_song_notes(analysis, config, min_note_ms)
@@ -482,6 +495,7 @@ def process_file(
                     original.samples, config.sample_rate, beats
                 ),
                 phrasing=True,
+                preserve_timing=analysis.sung_notes is not None,
             )
             events, velocities, arrangement_metadata = (
                 arranged.events,

@@ -40,6 +40,8 @@ class SongAnalysis:
     sample_count: int
     sample_rate: int
     details: dict[str, object] = field(default_factory=dict)
+    sung_notes: list | None = None
+    singing_regions: list[tuple[int, int]] | None = None
 
 
 def confirmed_vocals(
@@ -483,6 +485,8 @@ def repair_phrase_gaps(
         analysis.sample_count,
         analysis.sample_rate,
         details,
+        analysis.sung_notes,
+        analysis.singing_regions,
     )
 
 
@@ -905,6 +909,14 @@ def analyze_stems(
 ) -> SongAnalysis:
     """Prefer reliable singing; select a continuous instrument lead elsewhere."""
     config.validate()
+    if config.song_backend == "game":
+        baseline = analyze_stems(
+            vocals, instruments, replace(config, song_backend="rmvpe"), progress, device
+        )
+        if baseline.details.get("detected_content_mode") != "vocal":
+            baseline.details["vocal_pitch_backend"] = "unused"
+            return baseline
+        return apply_singing_notes(baseline, vocals, config, progress)
     if len(vocals) != len(instruments):
         raise ValueError("人声与乐器轨必须具有相同长度")
     count = math.ceil(len(vocals) / config.hop_size)
@@ -1039,3 +1051,53 @@ def analyze_stems(
         frames, onsets, sources, len(vocals), config.sample_rate, details
     )
     return repair_phrase_gaps(analysis, vocals, lead_signal, config)
+
+
+def apply_singing_notes(analysis, vocals, config, progress=None):
+    """Use note-level singing inside established vocal sections only."""
+    from .singing import SungNote, transcribe
+    from .notes import midi_to_frequency
+
+    if progress:
+        progress("按完整唱音识别音高和起止，保留换气、同音重复和真实快音。")
+    hop_ms = config.hop_size * 1000 / config.sample_rate
+    protected = singing_section_mask(
+        np.array([s == "vocals" for s in analysis.sources]), hop_ms / 1000
+    )
+    rms = _rms_grid(vocals, config.frame_size, config.hop_size, len(analysis.frames))
+    notes = []
+    for note in transcribe(vocals, config.sample_rate, progress):
+        first = max(0, math.ceil(note.start_ms / hop_ms))
+        last = min(len(rms), math.ceil(note.end_ms / hop_ms))
+        frequency = midi_to_frequency(round(note.midi)) if note.midi is not None else 0
+        audible = last > first and np.median(rms[first:last]) >= config.energy_threshold / 2
+        valid = audible and config.min_frequency_hz <= frequency <= config.max_frequency_hz
+        notes.append(SungNote(note.start_ms, note.end_ms, note.midi if valid else None))
+    frames, sources = list(analysis.frames), list(analysis.sources)
+    # A missing GAME note inside a singing section remains a rest; it never
+    # falls back to accompaniment or a transient frame-based vocal pitch.
+    for index in np.flatnonzero(protected):
+        frames[index] = PitchFrame(0, 0, float(rms[index]))
+        sources[index] = "rest"
+    onsets = {i for i in analysis.onsets if not protected[i]}
+    for note in notes:
+        if note.midi is None:
+            continue
+        first = max(0, math.ceil(note.start_ms / hop_ms))
+        last = min(len(frames), math.ceil(note.end_ms / hop_ms))
+        frequency = midi_to_frequency(round(note.midi))
+        for index in range(first, last):
+            if protected[index]:
+                frames[index] = PitchFrame(frequency, .9, float(rms[index]))
+                sources[index] = "vocals"
+        onset = round(note.start_ms / hop_ms)
+        if 0 <= onset < len(frames) and protected[onset]:
+            onsets.add(onset)
+    edges = np.flatnonzero(np.diff(np.r_[False, protected, False]))
+    total_ms = round(analysis.sample_count * 1000 / analysis.sample_rate)
+    regions = [(round(a * hop_ms), min(total_ms, round(b * hop_ms))) for a, b in zip(edges[::2], edges[1::2])]
+    details = dict(analysis.details, vocal_pitch_backend="game", vocal_section_evidence="rmvpe_crepe",
+                   note_boundary_method="GAME-1.0.3-small-8-step", sung_boundaries_preserved=True,
+                   game_max_chunk_ms=13200, game_vocal_notes=sum(n.midi is not None for n in notes),
+                   model_license="CC-BY-NC-SA-4.0")
+    return SongAnalysis(frames, onsets, sources, analysis.sample_count, analysis.sample_rate, details, notes, regions)

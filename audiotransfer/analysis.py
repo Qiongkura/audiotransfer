@@ -87,8 +87,8 @@ class AnalysisConfig:
             raise ValueError("octave_fold_tolerance_semitones 必须为正数")
         if self.pitch_mode not in {"legacy", "tracked", "song"}:
             raise ValueError("pitch_mode 必须是 song、legacy 或 tracked")
-        if self.song_backend not in {"rmvpe", "crepe", "pyin"}:
-            raise ValueError("song_backend 必须是 rmvpe、crepe 或 pyin")
+        if self.song_backend not in {"game", "rmvpe", "crepe", "pyin"}:
+            raise ValueError("song_backend 必须是 game、rmvpe、crepe 或 pyin")
         if self.content_mode not in {"auto", "vocal", "instrumental"}:
             raise ValueError("content_mode 必须是 auto、vocal 或 instrumental")
         if self.candidate_count <= 0:

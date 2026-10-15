@@ -23,6 +23,7 @@ AUDIO_SUFFIXES = {".mp3", ".wav", ".flac", ".m4a", ".aac", ".ogg", ".opus", ".wm
 CHATANG_SHA256 = "2b34f483a9b57082300ce296988bfc6cbdfca94711a691bf0d7b34b0cad11e4b"
 STAGES = ("检查音频", "分离人声与伴奏", "提取完整旋律", "整理节奏", "生成播放器")
 CONTENT_MODES = {"自动识别": "auto", "有演唱": "vocal", "纯音乐": "instrumental"}
+VOCAL_METHODS = {"唱音识别（试用）": "game", "连续音高（兼容）": "rmvpe"}
 
 
 @dataclass(frozen=True)
@@ -41,6 +42,7 @@ class ConversionRequest:
     controller: str = "ssd1306"
     mode: str = "song"
     content_mode: str = "auto"
+    song_backend: str = "game"
 
 
 def digest(path: Path) -> str:
@@ -116,10 +118,12 @@ def convert(
         raise ValueError("请选择完整歌曲或单旋律模式。")
     if request.content_mode not in CONTENT_MODES.values():
         raise ValueError("请选择自动识别、有演唱或纯音乐。")
+    if request.song_backend not in {"game", "rmvpe", "crepe", "pyin"}:
+        raise ValueError("请选择有效的人声识别方式。")
     title, artist = request.title.strip(), request.artist.strip() or "未知歌手"
     if not title:
         raise ValueError("请填写歌名。")
-    report(JobProgress(0, "检查音频并匹配已校对曲谱"))
+    report(JobProgress(0, "检查音频并准备旋律识别"))
     before = source.stat()
     signature = digest(source)
     name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "_", title).strip(" .")[:48] or "song"
@@ -135,6 +139,7 @@ def convert(
         signature == CHATANG_SHA256
         and request.mode == "song"
         and request.content_mode != "instrumental"
+        and request.song_backend != "game"
     ):
         # A fingerprint, never the filename, selects this recording's reviewed score.
         import numpy as np
@@ -189,7 +194,8 @@ def convert(
             source,
             raw,
             config=AnalysisConfig(
-                pitch_mode=request.mode, content_mode=request.content_mode
+                pitch_mode=request.mode, content_mode=request.content_mode,
+                song_backend=request.song_backend,
             ),
             min_note_ms=80,
             gap_ms=12,
@@ -243,6 +249,7 @@ def convert(
         requested_content_mode=request.content_mode,
         detected_content_mode=resolved,
         converter_version=__version__,
+        song_backend=request.song_backend,
         files=project_hashes(project),
     )
     (project / "desktop-job.json").write_text(
@@ -273,19 +280,20 @@ def flash(result: DesktopResult, report: Callable[[JobProgress], None]) -> str:
     result.validate_for_flash()
     # The ARM linker's map-file handling on Windows fails in Unicode paths.
     # Stage only the checked build inputs in an ASCII temporary directory.
-    locations = [Path(tempfile.gettempdir()), ROOT]
-    if os.environ.get("PUBLIC"):
-        locations.append(Path(os.environ["PUBLIC"]) / "Documents")
+    # Keep build files on the project's drive, including when Windows TEMP
+    # points to the system drive. The linker requires an ASCII build path.
+    locations = [ROOT, Path(ROOT.anchor) / "audiotransfer-temp"]
     for base in locations:
-        if str(base.resolve()).isascii() and base.is_dir():
+        if str(base.resolve()).isascii():
             try:
+                base.mkdir(parents=True, exist_ok=True)
                 scratch = tempfile.TemporaryDirectory(prefix="audiotransfer-", dir=base)
             except OSError:
                 continue
             break
     else:
         raise RuntimeError(
-            "烧录工具需要英文临时路径，请设置 TEMP 为可写的英文路径后重试。"
+            "烧录工具需要项目所在盘的可写英文路径，请检查工程目录权限后重试。"
         )
     with scratch as folder:
         build = Path(folder)
@@ -301,6 +309,13 @@ def _flash_project(
 ) -> str:
     base_command = [*platformio_command(), "run", "-d", str(build)]
     env = dict(os.environ, PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
+    env.update(TEMP=str(build), TMP=str(build))
+    # Reuse an existing tool cache on the project drive (including junctions).
+    # Otherwise put new downloads beside the project rather than on C:.
+    if "PLATFORMIO_CORE_DIR" not in env:
+        existing = (Path.home() / ".platformio").resolve()
+        if existing.drive.lower() != ROOT.drive.lower():
+            env["PLATFORMIO_CORE_DIR"] = str(ROOT / ".cache" / "platformio")
     report(JobProgress(0, "准备编译并连接 ST-Link"))
     lines: list[str] = []
     stage = 0

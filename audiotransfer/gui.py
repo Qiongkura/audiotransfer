@@ -15,6 +15,7 @@ from .desktop import (
     ROOT,
     STAGES,
     CONTENT_MODES,
+    VOCAL_METHODS,
     ConversionRequest,
     WavePreview,
     audio_labels,
@@ -54,6 +55,7 @@ class StudioApp:
         self.controller = tk.StringVar(value="ssd1306")
         self.mode = tk.StringVar(value="song")
         self.content_mode = tk.StringVar(value="自动识别")
+        self.vocal_method = tk.StringVar(value="唱音识别（试用）")
         self.status = tk.StringVar(value="准备好，把喜欢的歌放进来。")
         self.detail = tk.StringVar(value="完整歌曲 → 主旋律 → 开发板播放")
         self.counter = tk.StringVar(value="等待导入")
@@ -69,6 +71,7 @@ class StudioApp:
             self.controller,
             self.mode,
             self.content_mode,
+            self.vocal_method,
         ):
             var.trace_add("write", self._invalidate)
         self._enable_drop()
@@ -414,6 +417,7 @@ class StudioApp:
             self.controller.get(),
             self.mode.get(),
             CONTENT_MODES[self.content_mode.get()],
+            VOCAL_METHODS[self.vocal_method.get()],
         )
         self.result = None
         self._begin("convert")
@@ -635,7 +639,7 @@ class StudioApp:
             return
         dialog = tk.Toplevel(self.root)
         dialog.title("播放设置")
-        dialog.geometry("540x360")
+        dialog.geometry("540x440")
         dialog.configure(bg=CARD)
         dialog.transient(self.root)
         dialog.grab_set()
@@ -647,6 +651,7 @@ class StudioApp:
                 self.mode,
                 ("song", "tracked"),
             ),
+            ("人声旋律识别", self.vocal_method, tuple(VOCAL_METHODS)),
         ]:
             self.label(dialog, label, 10, MUTED).pack(anchor="w", padx=24, pady=(6, 4))
             ttk.Combobox(
