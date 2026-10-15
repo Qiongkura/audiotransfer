@@ -27,6 +27,7 @@ class DesktopTests(unittest.TestCase):
             def extract(src, output, **options):
                 self.assertEqual(options["config"].pitch_mode, "song")
                 self.assertEqual(options["config"].content_mode, "auto")
+                self.assertEqual(options["config"].song_backend, "rmvpe")
                 self.assertEqual(options["target"], "platformio-stm32")
                 self.assertEqual(options["sound_mode"], "pulse")
                 self.assertTrue(options["active_low"])

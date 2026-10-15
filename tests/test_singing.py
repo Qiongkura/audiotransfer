@@ -112,7 +112,7 @@ class SingingTests(unittest.TestCase):
                 self.assertEqual(options['config'].song_backend, 'game')
                 return write_outputs([NoteEvent(440, 300, 'A4')], output, target='platformio-stm32', sound_mode='pulse', active_low=True)
             with patch('audiotransfer.desktop.digest', return_value=CHATANG_SHA256), patch('audiotransfer.pipeline.process_file', side_effect=extract), patch('audiotransfer.scored_song.build', side_effect=AssertionError('reviewed score')):
-                result = convert(ConversionRequest(source, root / 'out', '茶汤'), lambda _: None)
+                result = convert(ConversionRequest(source, root / 'out', '茶汤', song_backend='game'), lambda _: None)
             self.assertTrue(result.preview.is_file())
             meta = json.loads((result.project / 'desktop-job.json').read_text(encoding='utf-8'))
             self.assertEqual(meta['song_backend'], 'game')

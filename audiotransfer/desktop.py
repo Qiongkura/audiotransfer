@@ -42,7 +42,7 @@ class ConversionRequest:
     controller: str = "ssd1306"
     mode: str = "song"
     content_mode: str = "auto"
-    song_backend: str = "game"
+    song_backend: str = "rmvpe"
 
 
 def digest(path: Path) -> str:
