@@ -182,100 +182,73 @@ def fit_event_duration(events: list[NoteEvent], duration_ms: int) -> list[NoteEv
 def stable_song_notes(
     analysis: SongAnalysis, config: AnalysisConfig, min_note_ms: int
 ) -> list[NoteFrame]:
-    """Use a local pitch centre and persistence, without a latched semitone."""
+    """Decode continuous lead pitch before rounding it into discrete notes.
+
+    Rounding each hop first discards how close a vibrato sample is to the
+    neighbouring semitone. Once rounded, the old decoder treated that small
+    excursion like a confidently sung new note. Keep the fractional evidence
+    until the complete, source-bounded path has been chosen.
+    """
     import math
     from scipy.ndimage import median_filter
 
     hop_ms = config.hop_size * 1000 / config.sample_rate
-    confirmation = max(2, math.ceil(min(80, max(40, min_note_ms)) / hop_ms))
-    labels: list[int | None] = []
-    current = None
-    pending = None
-    pending_start = 0
-    continuous_pitches = np.array(
-        [
-            (
-                69 + 12 * math.log2(p.frequency_hz / 440)
-                if math.isfinite(p.frequency_hz) and p.frequency_hz > 0
-                else np.nan
-            )
-            for p in analysis.frames
-        ]
-    )
-    # Smooth each voiced region separately. A 100-ms median suppresses
-    # oscillating vibrato; persistence accepts a sustained 0.6-semitone
-    # change. The former 0.8 threshold could hold the wrong note forever.
-    voiced = np.isfinite(continuous_pitches)
-    edges = np.flatnonzero(np.diff(np.r_[False, voiced, False]))
-    window = max(3, round(100 / hop_ms) | 1)
-    for start, stop in zip(edges[::2], edges[1::2]):
-        continuous_pitches[start:stop] = median_filter(
-            continuous_pitches[start:stop], size=window, mode="nearest"
-        )
-    for index, pitch in enumerate(analysis.frames):
-        frequency = pitch.frequency_hz
-        if not math.isfinite(frequency) or frequency <= 0:
-            labels.append(None)
-            current = pending = None
-            continue
-        continuous = continuous_pitches[index]
-        nearest = max(0, min(127, round(continuous)))
-        if current is None:
-            current = nearest
-        labels.append(current)
-        if nearest != current:
-            if pending != nearest:
-                pending, pending_start = nearest, index
-            if index - pending_start + 1 >= confirmation:
-                current = nearest
-                labels[pending_start : index + 1] = [current] * (
-                    index - pending_start + 1
-                )
-                pending = None
-        else:
-            pending = None
-    # Follow the observed vocal notes as a sequence. Confidence alone does not
-    # establish that a fleeting pitch is a separate sung note.
-    mask = np.array(
-        [
-            midi is not None
-            and (not analysis.sources or analysis.sources[i] == "vocals")
-            for i, midi in enumerate(labels)
-        ]
-    )
-    edges = np.flatnonzero(np.diff(np.r_[False, mask, False]))
+    pitches = np.array([
+        69 + 12 * math.log2(f.frequency_hz / 440)
+        if math.isfinite(f.frequency_hz) and f.frequency_hz > 0 else np.nan
+        for f in analysis.frames
+    ])
+    labels: list[int | None] = [None] * len(pitches)
     changed = 0
-    for start, stop in zip(edges[::2], edges[1::2]):
-        observed = np.array(labels[start:stop], dtype=int)
+    start = 0
+    while start < len(pitches):
+        if not np.isfinite(pitches[start]):
+            start += 1
+            continue
+        source = analysis.sources[start] if analysis.sources else "vocals"
+        stop = start + 1
+        while (stop < len(pitches) and np.isfinite(pitches[stop])
+               and (not analysis.sources or analysis.sources[stop] == source)):
+            stop += 1
+        # Both singing and instrumental leads keep fractional pitch evidence.
+        # A source change starts a fresh path even if there is no intervening rest.
+        width = max(1, round(40 / hop_ms) | 1)
+        continuous = median_filter(pitches[start:stop], size=width, mode="nearest")
         confidence = np.array([f.confidence for f in analysis.frames[start:stop]])
         attacks = {i - start for i in analysis.onsets if start <= i < stop}
-        decoded = _decode_vocal_note_path(observed, confidence, attacks, hop_ms)
-        changed += int(np.count_nonzero(decoded != observed))
+        if ((stop - start) * hop_ms < min(80, min_note_ms)
+                and not ((stop - start) * hop_ms >= 40
+                         and any(abs(i) * hop_ms <= 20 for i in attacks)
+                         and np.min(confidence) >= .85
+                         and np.max(abs(continuous - np.median(continuous))) <= .35)):
+            # An isolated consonant/leakage fragment has no sustained note
+            # evidence. Leave it silent instead of borrowing across a breath.
+            start = stop
+            continue
+        decoded = _decode_note_path(continuous, confidence, attacks, hop_ms, min_note_ms)
+        if source == "vocals":
+            changed += int(np.count_nonzero(decoded != np.rint(continuous)))
         labels[start:stop] = decoded.tolist()
-    if np.any(mask):
+        start = stop
+    if any(s == "vocals" for s in analysis.sources) or not analysis.sources:
         analysis.details.update(
-            vocal_note_decoder="confidence_weighted_observed_note_path",
+            vocal_note_decoder="continuous_pitch_evidence_path",
             vocal_note_context_ms=200,
             regularized_vocal_ms=round(changed * hop_ms),
         )
     return [
-        (
-            NoteFrame("rest", 0, 0)
-            if midi is None
-            else NoteFrame(
-                midi_to_note_name(midi),
-                midi_to_frequency(midi),
-                analysis.frames[index].confidence,
-            )
+        NoteFrame("rest", 0, 0) if midi is None else NoteFrame(
+            midi_to_note_name(midi), midi_to_frequency(midi), analysis.frames[i].confidence
         )
-        for index, midi in enumerate(labels)
+        for i, midi in enumerate(labels)
     ]
 
 
-def _decode_vocal_note_path(
-    observed: np.ndarray, confidence: np.ndarray, attacks: set[int], hop_ms: float
+def _decode_note_path(
+    continuous: np.ndarray, confidence: np.ndarray, attacks: set[int], hop_ms: float,
+    min_note_ms: int = 80,
 ) -> np.ndarray:
-    """Choose a continuous sung-note path without proposing new pitches.
+    """Choose a continuous note path without proposing new pitches.
 
     Weak short islands should not outweigh their reliable surrounding melody.
     Strong short notes and clear attacks can pay the change cost. Candidate
@@ -284,6 +257,7 @@ def _decode_vocal_note_path(
     """
     from scipy.ndimage import maximum_filter1d
 
+    observed = np.rint(continuous).astype(int)
     states = np.unique(observed)
     if len(states) <= 1:
         return observed.copy()
@@ -292,7 +266,7 @@ def _decode_vocal_note_path(
     np.fill_diagonal(transition, 0.0)
     weights = np.clip(np.nan_to_num(confidence, nan=0), 0, 1) ** 3
     emission = (
-        np.minimum((observed[:, None] - states[None, :]) ** 2, 3.0)
+        np.minimum((continuous[:, None] - states[None, :]) ** 2, 3.0)
         * weights[:, None]
         * hop_ms
         / 20
@@ -307,30 +281,78 @@ def _decode_vocal_note_path(
     )
     emission[~available] = np.inf
     attacked = np.zeros(len(observed), dtype=bool)
+    fast_attacked = np.zeros(len(observed), dtype=bool)
     margin = max(1, round(40 / hop_ms))
     for index in attacks:
         attacked[max(0, index - margin) : min(len(observed), index + margin + 1)] = True
-    score = emission[0]
-    back = np.zeros((len(observed), len(states)), dtype=np.uint8)
+        close = max(0, round(20 / hop_ms))
+        fast_attacked[max(0, index - close):min(len(observed), index + close + 1)] = True
+    # A note has a duration as well as a pitch. Track time spent in each
+    # candidate so a 20-60 ms outlier cannot pay two change costs merely by
+    # being far from the real note. A clear attack can support a genuine fast
+    # note down to 40 ms. Silence and source changes have already split runs.
+    minimum = max(1, min(len(observed), int(np.ceil(min(80, min_note_ms) / hop_ms))))
+    fast_minimum = max(1, min(minimum, int(np.ceil(40 / hop_ms))))
+    size = len(states)
+    score = np.full((size, minimum), np.inf)
+    score[:, 0] = emission[0]
+    back = np.zeros((len(observed), size, minimum), dtype=np.int32)
+    indices = np.arange(size)
     for index in range(1, len(observed)):
-        options = score[:, None] + transition * (0.35 if attacked[index] else 1.0)
-        back[index] = options.argmin(axis=0)
-        score = options.min(axis=0) + emission[index]
-    state = int(score.argmin())
+        current = np.full_like(score, np.inf)
+        # Remaining on a pitch advances its age, capped at the minimum dwell.
+        if minimum > 1:
+            current[:, 1:] = score[:, :-1] + emission[index, :, None]
+            back[index, :, 1:] = indices[:, None] * minimum + np.arange(minimum - 1)
+            hold = score[:, -1] < score[:, -2]
+            current[hold, -1] = score[hold, -1] + emission[index, hold]
+            back[index, hold, -1] = indices[hold] * minimum + minimum - 1
+        ages = np.full(size, minimum - 1, dtype=int)
+        previous = score[:, -1].copy()
+        for age in range(fast_minimum - 1, minimum - 1):
+            first = index - age - 1
+            if first < 0 or not fast_attacked[first] or np.min(confidence[first:index]) < .85:
+                continue
+            stable = np.max(abs(continuous[first:index, None] - states[None, :]), axis=0) <= .35
+            better = stable & (score[:, age] < previous)
+            previous[better] = score[better, age]
+            ages[better] = age
+        changes = transition * (0.35 if attacked[index] else 1.0)
+        if minimum > 1:
+            changes = changes.copy()
+            np.fill_diagonal(changes, np.inf)
+        options = previous[:, None] + changes
+        choices = options.argmin(axis=0)
+        current[:, 0] = options[choices, indices] + emission[index]
+        back[index, :, 0] = choices * minimum + ages[choices]
+        score = current
+    final = score.copy()
+    for age in range(minimum - 1):
+        first = len(observed) - age - 1
+        if (age + 1 < fast_minimum or not fast_attacked[first]
+                or np.min(confidence[first:]) < .85):
+            final[:, age] = np.inf
+        else:
+            stable = np.max(abs(continuous[first:, None] - states[None, :]), axis=0) <= .35
+            final[~stable, age] = np.inf
+    state = int(final.argmin())
     path = np.empty_like(observed)
     for index in range(len(observed) - 1, -1, -1):
-        path[index] = states[state]
-        state = int(back[index, state])
+        note, age = divmod(state, minimum)
+        path[index] = states[note]
+        state = int(back[index, note, age])
     return path
 
 
 def events_from_song(
     analysis: SongAnalysis, config: AnalysisConfig, min_note_ms: int
 ) -> list[NoteEvent]:
+    if min_note_ms < 0:
+        raise ValueError("min_note_ms 不能为负数")
     if analysis.sung_notes is not None:
         from .singing import overlay_events
-        # The frame-based route still supplies instruments. Singing keeps the
-        # model's exact note boundaries instead of being smoothed a second time.
+        # The frame route still supplies instruments. Keep the reconciled
+        # singing timeline instead of smoothing its boundaries a second time.
         baseline = events_from_song(
             replace(analysis, sung_notes=None, singing_regions=None), config, min_note_ms
         )
@@ -342,7 +364,10 @@ def events_from_song(
     # anchor threshold when converting weak portions of a reliable note.
     frames = stable_song_notes(analysis, config, min_note_ms)
     hop_ms = config.hop_size * 1000 / config.sample_rate
-    events = merge_note_frames(frames, hop_ms, min_note_ms, None)
+    # Voicing and note changes have already been checked. Generic duration-only
+    # merging used to swallow a real short breath or absorb a note across a
+    # source boundary. Group only; the source-aware decoder handles glitches.
+    events = merge_note_frames(frames, hop_ms, 0, None)
     events = fit_event_duration(
         events, round(analysis.sample_count * 1000 / analysis.sample_rate)
     )
@@ -479,7 +504,7 @@ def process_file(
             from .arrange import arrange_events, detect_beats, measure_beat_strengths
 
             if progress:
-                progress("正在整理节拍、合并滑音碎片和设置乐句力度。")
+                progress("正在保留原始换音时间，整理连奏与乐句力度。")
             original = decode_with_ffmpeg(input_path, config.sample_rate, ffmpeg)
             beats = detect_beats(original.samples, config.sample_rate)
             arranged = arrange_events(
@@ -495,7 +520,7 @@ def process_file(
                     original.samples, config.sample_rate, beats
                 ),
                 phrasing=True,
-                preserve_timing=analysis.sung_notes is not None,
+                preserve_timing=True,
             )
             events, velocities, arrangement_metadata = (
                 arranged.events,
@@ -504,7 +529,7 @@ def process_file(
             )
             if progress:
                 progress(
-                    f"编排完成：移调 {arranged.metadata['transpose_semitones']:+d} 半音，合并 {arranged.metadata['removed_slide_steps']} 个滑音碎片。"
+                    f"编排完成：保留原始换音时间，整体移调 {arranged.metadata['transpose_semitones']:+d} 半音。"
                 )
             if score_profile is not None:
                 import json

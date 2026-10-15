@@ -1054,50 +1054,87 @@ def analyze_stems(
 
 
 def apply_singing_notes(analysis, vocals, config, progress=None):
-    """Use note-level singing inside established vocal sections only."""
-    from .singing import SungNote, transcribe
+    """Use GAME proposals without discarding clearly observed sung notes."""
+    from .singing import SungNote, transcribe, reconcile_notes
     from .notes import midi_to_frequency
+    from .pipeline import events_from_song
 
     if progress:
-        progress("按完整唱音识别音高和起止，保留换气、同音重复和真实快音。")
+        progress("核对唱音边界与连续基音；保留清楚换音和换气，区分连奏与重新起音。")
     hop_ms = config.hop_size * 1000 / config.sample_rate
+    count = len(analysis.frames)
+    total_ms = round(analysis.sample_count * 1000 / analysis.sample_rate)
     protected = singing_section_mask(
         np.array([s == "vocals" for s in analysis.sources]), hop_ms / 1000
     )
-    rms = _rms_grid(vocals, config.frame_size, config.hop_size, len(analysis.frames))
-    notes = []
-    for note in transcribe(vocals, config.sample_rate, progress):
-        first = max(0, math.ceil(note.start_ms / hop_ms))
-        last = min(len(rms), math.ceil(note.end_ms / hop_ms))
-        frequency = midi_to_frequency(round(note.midi)) if note.midi is not None else 0
-        audible = last > first and np.median(rms[first:last]) >= config.energy_threshold / 2
-        valid = audible and config.min_frequency_hz <= frequency <= config.max_frequency_hz
-        notes.append(SungNote(note.start_ms, note.end_ms, note.midi if valid else None))
+    rms = _rms_grid(vocals, config.frame_size, config.hop_size, count)
+    raw = transcribe(vocals, config.sample_rate, progress)
+    pitch = np.array([f.frequency_hz for f in analysis.frames])
+    confidence = np.array([f.confidence for f in analysis.frames])
+    midi = np.full(count, np.nan)
+    voiced = (pitch > 0) & (np.array(analysis.sources) == "vocals")
+    midi[voiced] = 69 + 12 * np.log2(pitch[voiced] / 440)
+    proposals = []
+    rejected = 0
+    for note in raw:
+        a, b = max(0, math.ceil(note.start_ms / hop_ms)), min(count, math.ceil(note.end_ms / hop_ms))
+        target = round(note.midi) if note.midi is not None else None
+        frequency = midi_to_frequency(target) if target is not None else 0
+        # A separated backing sound can also look like a note to GAME. Require
+        # actual matching vocal evidence, rather than waveform energy alone.
+        support = ((confidence[a:b] >= .5) & (abs(midi[a:b] - (target or 0)) <= .75))
+        required_ms = min(80, (note.end_ms - note.start_ms) * .3)
+        valid = (target is not None and a < b
+                 and config.min_frequency_hz <= frequency <= config.max_frequency_hz
+                 and np.median(rms[a:b]) >= config.energy_threshold / 2
+                 and np.sum(support) * hop_ms >= required_ms)
+        rejected += int(target is not None and not valid)
+        proposals.append(SungNote(note.start_ms, note.end_ms, target if valid else None))
+
+    # A clear continuous F0 can split a model note that swallowed a real pitch
+    # change, correct a wrong pitch, or recover a vowel the model called rest.
+    reference = events_from_song(analysis, replace(config, song_backend="rmvpe"), 80)
+    anchors = []
+    cursor = 0
+    for event in reference:
+        end = cursor + event.duration_ms
+        a, b = max(0, math.ceil(cursor / hop_ms)), min(count, math.ceil(end / hop_ms))
+        if b > a:
+            if event.frequency_hz > 0:
+                target = round(69 + 12 * math.log2(event.frequency_hz / 440))
+                clear = ((confidence[a:b] >= .8) & (abs(midi[a:b] - target) <= .5))
+                if np.sum(clear) * hop_ms >= max(min(60, event.duration_ms), event.duration_ms * .5):
+                    anchors.append(SungNote(cursor, end, target))
+            elif np.max(rms[a:b], initial=0) < config.energy_threshold / 4:
+                anchors.append(SungNote(cursor, end, None))
+        cursor = end
+    onsets = set(analysis.onsets)
+    for note in proposals:
+        index = round(note.start_ms / hop_ms)
+        if (note.midi is not None and 0 <= index < count and protected[index]
+                and clear_note_attack(rms, index, hop_ms / 1000)):
+            onsets.add(index)
+    attacks_ms = {round(i * hop_ms) for i in onsets}
+    notes = reconcile_notes(proposals, anchors, attacks_ms, total_ms)
     frames, sources = list(analysis.frames), list(analysis.sources)
-    # A missing GAME note inside a singing section remains a rest; it never
-    # falls back to accompaniment or a transient frame-based vocal pitch.
     for index in np.flatnonzero(protected):
         frames[index] = PitchFrame(0, 0, float(rms[index]))
         sources[index] = "rest"
-    onsets = {i for i in analysis.onsets if not protected[i]}
     for note in notes:
         if note.midi is None:
             continue
-        first = max(0, math.ceil(note.start_ms / hop_ms))
-        last = min(len(frames), math.ceil(note.end_ms / hop_ms))
+        first, last = max(0, math.ceil(note.start_ms / hop_ms)), min(count, math.ceil(note.end_ms / hop_ms))
         frequency = midi_to_frequency(round(note.midi))
         for index in range(first, last):
             if protected[index]:
                 frames[index] = PitchFrame(frequency, .9, float(rms[index]))
                 sources[index] = "vocals"
-        onset = round(note.start_ms / hop_ms)
-        if 0 <= onset < len(frames) and protected[onset]:
-            onsets.add(onset)
     edges = np.flatnonzero(np.diff(np.r_[False, protected, False]))
-    total_ms = round(analysis.sample_count * 1000 / analysis.sample_rate)
     regions = [(round(a * hop_ms), min(total_ms, round(b * hop_ms))) for a, b in zip(edges[::2], edges[1::2])]
     details = dict(analysis.details, vocal_pitch_backend="game", vocal_section_evidence="rmvpe_crepe",
-                   note_boundary_method="GAME-1.0.3-small-8-step", sung_boundaries_preserved=True,
-                   game_max_chunk_ms=13200, game_vocal_notes=sum(n.midi is not None for n in notes),
+                   note_boundary_method="GAME-proposals-with-continuous-F0-anchors",
+                   sung_boundaries_preserved=False, game_max_chunk_ms=13200,
+                   game_vocal_notes=sum(n.midi is not None for n in notes),
+                   rejected_unsupported_game_notes=rejected, reliable_note_anchors=len(anchors),
                    model_license="CC-BY-NC-SA-4.0")
     return SongAnalysis(frames, onsets, sources, analysis.sample_count, analysis.sample_rate, details, notes, regions)

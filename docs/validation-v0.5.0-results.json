@@ -1,0 +1,197 @@
+{
+  "reference": "Model agreement diagnostic, not independent transcription accuracy or listening score",
+  "song_results": [
+    {
+      "key": "li",
+      "source": "李佳薇 - 甲乙丙丁 (你我怎么两清).flac",
+      "duration_ms": 210462,
+      "reference_ms": 69740,
+      "old": {
+        "events": 738,
+        "voiced": 604,
+        "short_voiced": 181,
+        "legato": 296,
+        "missing_reference_ms": 420,
+        "deviation_over_half_semitone_ms": 7120,
+        "deviation_over_one_semitone_ms": 2800,
+        "deviation_over_five_semitones_ms": 80,
+        "rest_ms": 41132,
+        "snapped": 478
+      },
+      "new": {
+        "events": 767,
+        "voiced": 598,
+        "short_voiced": 184,
+        "legato": 271,
+        "missing_reference_ms": 60,
+        "deviation_over_half_semitone_ms": 5520,
+        "deviation_over_one_semitone_ms": 380,
+        "deviation_over_five_semitones_ms": 0,
+        "rest_ms": 41242,
+        "snapped": 0
+      },
+      "title": "甲乙丙丁 (你我怎么两清)",
+      "artist": "李佳薇"
+    },
+    {
+      "key": "lose",
+      "source": "01 Lose My Mind (feat. Doja Cat).flac",
+      "duration_ms": 209051,
+      "reference_ms": 39580,
+      "old": {
+        "events": 790,
+        "voiced": 716,
+        "short_voiced": 323,
+        "legato": 359,
+        "missing_reference_ms": 0,
+        "deviation_over_half_semitone_ms": 3080,
+        "deviation_over_one_semitone_ms": 1680,
+        "deviation_over_five_semitones_ms": 40,
+        "rest_ms": 20576,
+        "snapped": 504
+      },
+      "new": {
+        "events": 970,
+        "voiced": 764,
+        "short_voiced": 380,
+        "legato": 357,
+        "missing_reference_ms": 0,
+        "deviation_over_half_semitone_ms": 2020,
+        "deviation_over_one_semitone_ms": 200,
+        "deviation_over_five_semitones_ms": 0,
+        "rest_ms": 24091,
+        "snapped": 0
+      },
+      "title": "Lose My Mind (feat. Doja Cat)",
+      "artist": "Hans Zimmer"
+    },
+    {
+      "key": "lp",
+      "source": "09. Linkin Park - One More Light  [USWB11700234].flac",
+      "duration_ms": 255082,
+      "reference_ms": 100100,
+      "old": {
+        "events": 557,
+        "voiced": 454,
+        "short_voiced": 93,
+        "legato": 191,
+        "missing_reference_ms": 220,
+        "deviation_over_half_semitone_ms": 5560,
+        "deviation_over_one_semitone_ms": 2480,
+        "deviation_over_five_semitones_ms": 140,
+        "rest_ms": 50564,
+        "snapped": 424
+      },
+      "new": {
+        "events": 579,
+        "voiced": 449,
+        "short_voiced": 125,
+        "legato": 171,
+        "missing_reference_ms": 20,
+        "deviation_over_half_semitone_ms": 3780,
+        "deviation_over_one_semitone_ms": 140,
+        "deviation_over_five_semitones_ms": 0,
+        "rest_ms": 50642,
+        "snapped": 0
+      },
+      "title": "One More Light",
+      "artist": "Linkin Park"
+    },
+    {
+      "key": "sun",
+      "source": "孙燕姿 - 我怀念的.flac",
+      "duration_ms": 289067,
+      "reference_ms": 94440,
+      "old": {
+        "events": 984,
+        "voiced": 787,
+        "short_voiced": 270,
+        "legato": 363,
+        "missing_reference_ms": 280,
+        "deviation_over_half_semitone_ms": 10940,
+        "deviation_over_one_semitone_ms": 3780,
+        "deviation_over_five_semitones_ms": 560,
+        "rest_ms": 70761,
+        "snapped": 670
+      },
+      "new": {
+        "events": 1047,
+        "voiced": 793,
+        "short_voiced": 301,
+        "legato": 332,
+        "missing_reference_ms": 60,
+        "deviation_over_half_semitone_ms": 9020,
+        "deviation_over_one_semitone_ms": 640,
+        "deviation_over_five_semitones_ms": 280,
+        "rest_ms": 71327,
+        "snapped": 0
+      },
+      "title": "我怀念的",
+      "artist": "孙燕姿"
+    },
+    {
+      "key": "tea",
+      "source": "茶汤.flac",
+      "duration_ms": 308773,
+      "reference_ms": 90020,
+      "old": {
+        "events": 930,
+        "voiced": 762,
+        "short_voiced": 257,
+        "legato": 342,
+        "missing_reference_ms": 180,
+        "deviation_over_half_semitone_ms": 12720,
+        "deviation_over_one_semitone_ms": 5800,
+        "deviation_over_five_semitones_ms": 1460,
+        "rest_ms": 52901,
+        "snapped": 496
+      },
+      "new": {
+        "events": 1020,
+        "voiced": 782,
+        "short_voiced": 287,
+        "legato": 332,
+        "missing_reference_ms": 80,
+        "deviation_over_half_semitone_ms": 10960,
+        "deviation_over_one_semitone_ms": 2360,
+        "deviation_over_five_semitones_ms": 1160,
+        "rest_ms": 54213,
+        "snapped": 0
+      },
+      "title": "茶汤",
+      "artist": "郁可唯"
+    },
+    {
+      "key": "xu",
+      "source": "许茹芸 - 泪海.flac",
+      "duration_ms": 298000,
+      "reference_ms": 78460,
+      "old": {
+        "events": 794,
+        "voiced": 695,
+        "short_voiced": 160,
+        "legato": 332,
+        "missing_reference_ms": 820,
+        "deviation_over_half_semitone_ms": 7600,
+        "deviation_over_one_semitone_ms": 1780,
+        "deviation_over_five_semitones_ms": 60,
+        "rest_ms": 54668,
+        "snapped": 243
+      },
+      "new": {
+        "events": 877,
+        "voiced": 698,
+        "short_voiced": 184,
+        "legato": 301,
+        "missing_reference_ms": 680,
+        "deviation_over_half_semitone_ms": 7720,
+        "deviation_over_one_semitone_ms": 420,
+        "deviation_over_five_semitones_ms": 20,
+        "rest_ms": 56720,
+        "snapped": 0
+      },
+      "title": "泪海",
+      "artist": "许茹芸"
+    }
+  ]
+}

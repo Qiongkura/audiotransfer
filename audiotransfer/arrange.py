@@ -136,8 +136,9 @@ def arrange_events(
     return Arrangement(shifted, velocities, {
         "tempo_bpm": round(60000 / period, 3) if period else None,
         "transpose_semitones": transpose, "removed_slide_steps": removed,
-        "snapped_boundaries": snapped, "max_snap_ms": 45,
-        "duration_ms": total, "grid": "sixteenth",
+        "snapped_boundaries": snapped, "max_snap_ms": 0 if preserve_timing else 45,
+        "duration_ms": total, "grid": None if preserve_timing else "sixteenth",
+        "timing": "original" if preserve_timing else "beat_grid",
         "legato_transitions": sum(e.legato for e in shifted),
         **expression,
         **(analysis.details if analysis is not None else {}),

@@ -20,10 +20,9 @@ from . import __version__
 
 ROOT = Path(__file__).resolve().parent.parent
 AUDIO_SUFFIXES = {".mp3", ".wav", ".flac", ".m4a", ".aac", ".ogg", ".opus", ".wma"}
-CHATANG_SHA256 = "2b34f483a9b57082300ce296988bfc6cbdfca94711a691bf0d7b34b0cad11e4b"
 STAGES = ("检查音频", "分离人声与伴奏", "提取完整旋律", "整理节奏", "生成播放器")
 CONTENT_MODES = {"自动识别": "auto", "有演唱": "vocal", "纯音乐": "instrumental"}
-VOCAL_METHODS = {"唱音识别（试用）": "game", "连续音高（兼容）": "rmvpe"}
+VOCAL_METHODS = {"连续主旋律（默认）": "rmvpe", "唱音识别（试用）": "game"}
 
 
 @dataclass(frozen=True)
@@ -131,82 +130,47 @@ def convert(
     raw, project = job / "melody", job / "player"
     job.mkdir(parents=True, exist_ok=False)
     from .analysis import AnalysisConfig
-    from .output import write_outputs
     from .pipeline import process_file
     from .player import write_player_project
 
-    if (
-        signature == CHATANG_SHA256
-        and request.mode == "song"
-        and request.content_mode != "instrumental"
-        and request.song_backend != "game"
-    ):
-        # A fingerprint, never the filename, selects this recording's reviewed score.
-        import numpy as np
-        from .scored_song import build
+    stage = 0
 
-        example = ROOT / "examples/chatang"
-        report(JobProgress(2, "已匹配《茶汤》原录音，使用此前校对的完整曲谱"))
-        profile = json.loads((example / "profile.json").read_text(encoding="utf-8"))
-        baseline = json.loads(
-            (example / "baseline-v5.json").read_text(encoding="utf-8")
-        )
-        with np.load(example / "song-analysis.npz", allow_pickle=False) as analysis:
-            events, strengths, metadata = build(profile, baseline, analysis, 12)
-        metadata.update(
-            requested_content_mode=request.content_mode, detected_content_mode="vocal"
-        )
-        report(JobProgress(3, "保留校对后的演唱、前奏、间奏与尾奏"))
-        write_outputs(
-            events,
-            raw,
-            target="platformio-stm32",
-            stm32_pin="PA8",
-            gap_ms=12,
-            sound_mode="pulse",
-            active_low=True,
-            velocities=strengths,
-            arrangement=metadata,
-        )
-    else:
-        stage = 0
-
-        def forward(message: str) -> None:
-            nonlocal stage
-            if any(word in message for word in ("整理", "编排")):
-                stage = max(stage, 3)
-            elif any(word in message for word in ("跟踪", "音高", "旋律")):
-                stage = max(stage, 2)
-            elif any(word in message for word in ("分离", "分轨")):
-                stage = max(stage, 1)
-            match = re.search(r"进度[：:]\s*(\d+)%", message)
-            report(
-                JobProgress(stage, message, min(100, int(match[1])) if match else None)
-            )
-
+    def forward(message: str) -> None:
+        nonlocal stage
+        if any(word in message for word in ("整理", "编排")):
+            stage = max(stage, 3)
+        elif any(word in message for word in ("跟踪", "音高", "旋律")):
+            stage = max(stage, 2)
+        elif any(word in message for word in ("分离", "分轨")):
+            stage = max(stage, 1)
+        match = re.search(r"进度[：:]\s*(\d+)%", message)
         report(
-            JobProgress(
-                1 if request.mode == "song" else 2,
-                "准备分析音频；首次使用可能需要下载模型",
-            )
+            JobProgress(stage, message, min(100, int(match[1])) if match else None)
         )
-        process_file(
-            source,
-            raw,
-            config=AnalysisConfig(
-                pitch_mode=request.mode, content_mode=request.content_mode,
-                song_backend=request.song_backend,
-            ),
-            min_note_ms=80,
-            gap_ms=12,
-            target="platformio-stm32",
-            stm32_pin="PA8",
-            sound_mode="pulse",
-            active_low=True,
-            arrangement="score",
-            progress=forward,
-            separation_cache_dir=request.output_root,
+
+    report(
+        JobProgress(
+            1 if request.mode == "song" else 2,
+            "准备分析音频；首次使用可能需要下载模型",
         )
+    )
+    process_file(
+        source,
+        raw,
+        config=AnalysisConfig(
+            pitch_mode=request.mode, content_mode=request.content_mode,
+            song_backend=request.song_backend,
+        ),
+        min_note_ms=80,
+        gap_ms=12,
+        target="platformio-stm32",
+        stm32_pin="PA8",
+        sound_mode="pulse",
+        active_low=True,
+        arrangement="score",
+        progress=forward,
+        separation_cache_dir=request.output_root,
+    )
     report(JobProgress(4, "生成中文屏幕、音量键和暂停键固件"))
     write_player_project(
         raw, project, title=title, artist=artist, controller=request.controller

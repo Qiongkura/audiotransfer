@@ -1,4 +1,4 @@
-"""GAME note boundaries, bounded CPU inference, and exact vocal overlays.
+"""GAME proposals, bounded CPU inference, and supported vocal note overlays.
 
 The client is original code. GAME's pretrained models are CC BY-NC-SA 4.0;
 see docs/GAME-NOTICE.md. Weights are downloaded and verified locally.
@@ -40,6 +40,33 @@ class SungNote:
     start_ms: int
     end_ms: int
     midi: float | None
+
+
+def reconcile_notes(proposals, anchors, attacks, duration_ms):
+    """Use supported model proposals, with clear F0 or silence taking priority.
+
+    Anchors are nonoverlapping, observed intervals, including genuine silence.
+    A model boundary alone is not evidence of a new attack of the same pitch.
+    """
+    points = sorted({0, duration_ms, *attacks,
+                     *(t for n in [*proposals, *anchors] for t in (n.start_ms, n.end_ms))})
+    result = []
+    pi = ai = 0
+    for first, last in zip(points, points[1:]):
+        if not 0 <= first < last <= duration_ms:
+            continue
+        while pi < len(proposals) and proposals[pi].end_ms <= first:
+            pi += 1
+        while ai < len(anchors) and anchors[ai].end_ms <= first:
+            ai += 1
+        anchor = anchors[ai] if ai < len(anchors) and anchors[ai].start_ms <= first else None
+        proposal = proposals[pi] if pi < len(proposals) and proposals[pi].start_ms <= first else None
+        midi = anchor.midi if anchor is not None else proposal.midi if proposal is not None else None
+        if result and result[-1].midi == midi and (midi is None or first not in attacks):
+            result[-1] = SungNote(result[-1].start_ms, last, midi)
+        else:
+            result.append(SungNote(first, last, midi))
+    return result
 
 
 def _download(archive: Path, progress) -> None:

@@ -142,7 +142,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--song-backend",
         choices=("game", "rmvpe", "crepe", "pyin"),
         default="rmvpe",
-        help="完整歌曲音高识别；game按唱音起止识别，默认rmvpe为兼容方式",
+        help="完整歌曲音高识别；默认rmvpe连续主旋律，game为试用唱音方式",
     )
     parser.add_argument(
         "--content-mode",

@@ -55,7 +55,7 @@ class StudioApp:
         self.controller = tk.StringVar(value="ssd1306")
         self.mode = tk.StringVar(value="song")
         self.content_mode = tk.StringVar(value="自动识别")
-        self.vocal_method = tk.StringVar(value="连续音高（兼容）")
+        self.vocal_method = tk.StringVar(value="连续主旋律（默认）")
         self.status = tk.StringVar(value="准备好，把喜欢的歌放进来。")
         self.detail = tk.StringVar(value="完整歌曲 → 主旋律 → 开发板播放")
         self.counter = tk.StringVar(value="等待导入")

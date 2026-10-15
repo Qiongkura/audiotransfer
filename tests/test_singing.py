@@ -11,7 +11,7 @@ import numpy as np
 
 from audiotransfer.analysis import AnalysisConfig, PitchFrame
 from audiotransfer.arrange import arrange_events
-from audiotransfer.desktop import CHATANG_SHA256, ConversionRequest, convert
+from audiotransfer.desktop import ConversionRequest, convert
 from audiotransfer.events import NoteEvent
 from audiotransfer.output import write_outputs
 from audiotransfer.pipeline import events_from_song
@@ -105,17 +105,17 @@ class SingingTests(unittest.TestCase):
             self.assertEqual(archive.read_bytes(), b'abcdef')
         self.assertEqual(seen, ['bytes=0-5', 'bytes=2-5'])
 
-    def test_new_mode_never_substitutes_the_reviewed_tea_score(self):
+    def test_every_mode_uses_the_same_automatic_route_for_tea(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder); source = root / '茶汤.flac'; source.write_bytes(b'fixture')
             def extract(src, output, **options):
-                self.assertEqual(options['config'].song_backend, 'game')
                 return write_outputs([NoteEvent(440, 300, 'A4')], output, target='platformio-stm32', sound_mode='pulse', active_low=True)
-            with patch('audiotransfer.desktop.digest', return_value=CHATANG_SHA256), patch('audiotransfer.pipeline.process_file', side_effect=extract), patch('audiotransfer.scored_song.build', side_effect=AssertionError('reviewed score')):
-                result = convert(ConversionRequest(source, root / 'out', '茶汤', song_backend='game'), lambda _: None)
-            self.assertTrue(result.preview.is_file())
-            meta = json.loads((result.project / 'desktop-job.json').read_text(encoding='utf-8'))
-            self.assertEqual(meta['song_backend'], 'game')
+            with patch('audiotransfer.desktop.digest', return_value='2b34f483a9b57082300ce296988bfc6cbdfca94711a691bf0d7b34b0cad11e4b'), patch('audiotransfer.pipeline.process_file', side_effect=extract), patch('audiotransfer.scored_song.build', side_effect=AssertionError('reviewed score')):
+                for backend in ('rmvpe', 'game', 'crepe', 'pyin'):
+                    result = convert(ConversionRequest(source, root / 'out', '茶汤', song_backend=backend), lambda _: None)
+                    self.assertTrue(result.preview.is_file())
+                    meta = json.loads((result.project / 'desktop-job.json').read_text(encoding='utf-8'))
+                    self.assertEqual(meta['song_backend'], backend)
 
 
 if __name__ == '__main__':
